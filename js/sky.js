@@ -10,14 +10,7 @@ function initialize() {
       min: 0,
       max: 4000,
       value: 40000,
-      slide: function(event, ui) {
-        $("#size").text(ui.value);
-        let thumb = $(this).children('.ui-slider-handle');
-        let position = $('#sliderContainer').position().top + thumb.position().top;
-        position = position + 10;
-        $('#sliderLine').css('top', position);
-        $('#size').css('top', position);
-      }
+      slide: sliderMoved
     });
     $("#size").text($("#slider").slider("value"));
 
@@ -30,6 +23,16 @@ function initialize() {
     }
 
     startPromptTimer();
+}
+
+function sliderMoved() {
+    let slider = $("#slider");
+    $("#size").text(slider.get(0).value);
+    let thumb = slider.children('.ui-slider-handle');
+    let position = $('#sliderContainer').position().top + thumb.position().top;
+    position = position + 10;
+    $('#sliderLine').css('top', position);
+    $('#size').css('top', position);
 }
 
 var _slides = [];
@@ -75,15 +78,9 @@ function startPromptTimer() {
 }
 
 function readURL() {
-
     if (this.files && this.files[0]) {
         let reader = new FileReader();
-        $('#userImage').load(function() {
-            $('#userImage').resizable({
-                aspectRatio: true
-            });
-            $('#screenshot').draggable();
-        });
+        $('#userImage').load(screenshotReady);
         $(reader).load(function(e) {
             $('#userImage').attr('src', e.target.result);
         });
@@ -91,6 +88,15 @@ function readURL() {
         $('#selectImage').hide();
         $('#alignImage').show();
     }
+}
+
+function screenshotReady() {
+
+    $('#userImage').resizable({
+        aspectRatio: true
+    });
+    $('#screenshot').draggable();
+    sliderMoved();
 }
 
 

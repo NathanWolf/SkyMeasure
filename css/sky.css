@@ -116,7 +116,6 @@ div#size {
     position: absolute;
     left: 50%;
     margin-left:140px;
-    top: 320px;
     padding: 5px;
 }
 
@@ -127,7 +126,7 @@ div#slider {
 div#sliderContainer {
     position: absolute;
     left: 50%;
-    top: 320px;
+    top: 330px;
     margin-left: 120px;
 }
 
@@ -138,7 +137,6 @@ div#sliderLine {
     position: absolute;
     left: 50%;
     margin-left: -300px;
-    top: 320px;
     z-index: 150;
 }
 
