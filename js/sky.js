@@ -29,7 +29,7 @@ function initialize() {
 
 function sliderMoved() {
     let slider = $("#slider");
-    $("#size").text(slider.get(0).value);
+    $("#size").text(slider.slider('value'));
     let thumb = slider.children('.ui-slider-handle');
     let position = $('#sliderContainer').position().top + thumb.position().top;
     position = position + 10;
