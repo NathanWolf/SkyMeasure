@@ -82,7 +82,7 @@ function readURL() {
             $('#userImage').resizable({
                 aspectRatio: true
             });
-            $('#userImage').draggable();
+            $('#screenshot').draggable();
         });
         $(reader).load(function(e) {
             $('#userImage').attr('src', e.target.result);

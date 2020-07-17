@@ -93,6 +93,10 @@ img#userImage {
     margin-left: -300px;
 }
 
+div#screenshot {
+    display: inline-block;
+}
+
 div#lantern {
     background-image: url(../image/lantern.png);
     position: absolute;
@@ -136,4 +140,9 @@ div#sliderLine {
     margin-left: -300px;
     top: 320px;
     z-index: 150;
+}
+
+span.discord {
+    font-weight: bold;
+    color: #00AAFF;
 }
