@@ -89,6 +89,8 @@ div.slideContainer {
 
 img#userImage {
     width: 600px;
+    left: 50%;
+    margin-left: -300px;
 }
 
 div#lantern {
