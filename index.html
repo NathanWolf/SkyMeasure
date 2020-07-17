@@ -1,0 +1,88 @@
+<html lang="en">
+<head>
+    <title>Sky Measuring Tape</title>
+
+    <link rel="shortcut icon" href="image/favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/sky.css">
+
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/sky.js"></script>
+
+</head>
+<body>
+    <h1>Sky Measuring Tape</h1>
+    <div id="skip" class="ui-icon ui-icon-arrowthick-1-e" title="Skip tutorial and go straight to the tool"></div>
+
+    <div id="step1" class="slide">
+        <h2><span class="step">Step 1:</span>Go to this lantern in the Golden Wasteland</h2>
+        <div class="slideImage" style="background-image: url(image/location.jpg);"></div>
+        <div class="overlay">
+            <h3>It is between the hair and cape changing rooms</h3>
+            <h3>Make sure to use the right lantern, not all lanterns are created equally!</h3>
+        </div>
+    </div>
+
+    <div id="step2" class="slide">
+        <h2><span class="step">Step 2:</span>Select the default hair style</h2>
+        <div class="slideImage" style="background-image: url(image/hair.jpg);"></div>
+    </div>
+
+    <div id="step3" class="slide">
+        <h2><span class="step">Step 3:</span>Select the default stance</h2>
+        <div class="slideImage" style="background-image: url(image/stance.jpg);"></div>
+    </div>
+
+    <div id="step4" class="slide">
+        <h2><span class="step">Step 4:</span>Rotate the camera to face towards the whirlpool storm, and align the right edge of the lantern with the middle of your head</h2>
+        <div class="slideImage" style="background-image: url(image/align1.jpg);"></div>
+    </div>
+
+    <div id="step5" class="slide">
+        <h2><span class="step">Step 5:</span>Rotate and align the camera so the diamond in the lantern is completely flat</h2>
+        <div class="slideImage" style="background-image: url(image/align2.jpg);"></div>
+    </div>
+
+    <div id="step6" class="slide">
+        <h2><span class="step">Step 6:</span>Take a screenshot!</h2>
+        <div class="slideImage" style="background-image: url(image/screenshot.jpg);"></div>
+    </div>
+
+    <div id="selectImage" style="display:none">
+        <h2><span class="step">Step 7:</span> Select your screenshot to load it onto this page</h2>
+        <div class="slideContainer">
+            <form id="imageForm">
+                <input type="file" id="imageInput" />
+            </form>
+        </div>
+    </div>
+
+    <div id="alignImage" style="display:none">
+        <h2><span class="step">Step 8:</span>Drag and resize your screenshot to align it with the lantern</h2>
+        <div id="screenshot">
+            <img id="userImage" alt="Your screenshot" src="image/blank.png"/>
+        </div>
+        <div id="lantern"></div>
+        <div id="sliderContainer">
+            <div id="slider"></div>
+        </div>
+        <div id="size"></div>
+        <div id="sliderLine">
+
+        </div>
+
+        <div class="overlay">
+            <h3>Drag near the side of the screenshot to resize it</h3>
+            <h3>Once aligned, use the slider to measure yourself!</h3>
+        </div>
+    </div>
+
+    <div id="prompt">
+        Click to continue
+    </div>
+</body>
+
+</html>
