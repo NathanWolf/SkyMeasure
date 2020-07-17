@@ -1,6 +1,6 @@
 function initialize() {
     $('#prompt').on('click', nextSlide);
-    $('.slide').on('click', nextSlide);
+    $('.slideImage').on('click', nextSlide);
     $('#next').on('click', nextSlide);
     $('#previous').on('click', previousSlide);
     $('#skip').on('click', goToTool);
