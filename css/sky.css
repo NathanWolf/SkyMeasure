@@ -87,12 +87,6 @@ div.slideContainer {
     padding: 10px;
 }
 
-img#userImage {
-    width: 600px;
-    left: 50%;
-    margin-left: -300px;
-}
-
 div#screenshot {
     display: inline-block;
 }
@@ -143,4 +137,10 @@ div#sliderLine {
 span.discord {
     font-weight: bold;
     color: #00AAFF;
+}
+
+.ui-resizable-handle{
+    width: 0;
+    height: 0;
+    border: 8px solid rgba(0, 255, 0, 0.75);
 }

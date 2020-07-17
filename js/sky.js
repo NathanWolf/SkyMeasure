@@ -92,11 +92,26 @@ function readURL() {
 
 function screenshotReady() {
     $('#userImage').resizable({
-        aspectRatio: true
+        aspectRatio: true,
+        handles: 'n, e, s, w, ne, se, sw, nw'
     });
     $('#screenshot').draggable();
-    $('#screenshot').css('left', $('#lantern').position().left);
+    $('#screenshot').css('left', $('#lantern').position().left - 300);
+
+    resize($('#userImage'), 600, 600 / $('#userImage').width() * $('#userImage').height());
     sliderMoved();
+}
+
+function resize(target, new_width, new_height){
+    let $wrapper = $(target).resizable('widget'),
+        $element = $wrapper.find('.ui-resizable'),
+        dx = $element.width()  - new_width,
+        dy = $element.height() - new_height;
+
+    $element.width( new_width );
+    $wrapper.width( $wrapper.width() - dx );
+    $element.height( new_height );
+    $wrapper.height( $wrapper.height() - dy );
 }
 
 
