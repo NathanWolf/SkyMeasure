@@ -70,6 +70,26 @@ div.overlay {
 }
 
 div#skip {
+    margin-left: 360px;
+    border-radius: 50%;
+    border: 8px solid white;
+    background-color: rgba(255,255,255,0.9);
+    position: absolute;
+    left: 50%;
+    cursor: pointer;
+}
+
+div#previous {
+    margin-left: -350px;
+    border-radius: 50%;
+    border: 8px solid white;
+    background-color: rgba(255,255,255,0.9);
+    position: absolute;
+    left: 50%;
+    cursor: pointer;
+}
+
+div#next {
     margin-left: 320px;
     border-radius: 50%;
     border: 8px solid white;

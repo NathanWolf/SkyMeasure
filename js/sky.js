@@ -1,6 +1,8 @@
 function initialize() {
     $('#prompt').on('click', nextSlide);
     $('.slide').on('click', nextSlide);
+    $('#next').on('click', nextSlide);
+    $('#previous').on('click', previousSlide);
     $('#skip').on('click', goToTool);
     $('#imageInput').change(readURL);
 
@@ -38,6 +40,25 @@ function sliderMoved() {
 var _slides = [];
 var _currentSlide = 0;
 
+function previousSlide() {
+    if (_currentSlide > 0) {
+        let slide = _slides[_currentSlide];
+        $('#' + slide).hide();
+        _currentSlide--;
+        slide = _slides[_currentSlide];
+        $('#' + slide).show();
+        startPromptTimer();
+
+        $('#selectImage').hide();
+        $('#alignImage').hide();
+        $('#next').show();
+        $('#skip').show();
+    }
+    if (_currentSlide == 0) {
+        $('#previous').hide();
+    }
+}
+
 function nextSlide() {
     if (_currentSlide < _slides.length - 1) {
         let slide = _slides[_currentSlide];
@@ -45,6 +66,7 @@ function nextSlide() {
         _currentSlide++;
         slide = _slides[_currentSlide];
         $('#' + slide).show();
+        $('#previous').show();
         startPromptTimer();
     } else {
         goToTool();
@@ -59,6 +81,8 @@ function goToTool() {
     cancelPromptTimer();
     $('#selectImage').show();
     $('#skip').hide();
+    $('#next').hide();
+    $('#previous').show();
 }
 
 var _promptTimer = null;
