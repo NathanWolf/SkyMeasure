@@ -91,11 +91,11 @@ function readURL() {
 }
 
 function screenshotReady() {
-
     $('#userImage').resizable({
         aspectRatio: true
     });
     $('#screenshot').draggable();
+    $('#screenshot').css('left', $('#lantern').position().left);
     sliderMoved();
 }
 
