@@ -56,8 +56,8 @@
     <div id="selectImage" style="display:none">
         <h2><span class="step">Step 7:</span> Select your screenshot to load it onto this page</h2>
         <div class="slideContainer">
-            <form id="imageForm">
-                <input type="file" id="imageInput" />
+            <form id="imageForm" action="upload.php" method="post" enctype="multipart/form-data">
+                <input type="file" id="imageInput" name="screenshot"/>
             </form>
         </div>
     </div>
@@ -66,6 +66,12 @@
         <h2><span class="step">Step 8:</span>Drag and resize your screenshot to align it with the lantern</h2>
         <div id="screenshot">
             <img id="userImage" alt="Your screenshot" src="image/blank.png"/>
+        </div>
+        <div id="smallestScreenshot" style="display:none">
+            <img alt="Smallest Screenshot" src="image/smallest.jpg"/>
+        </div>
+        <div id="tallestScreenshot" style="display:none">
+            <img alt="Tallest Screenshot" src="image/tallest.jpg"/>
         </div>
         <div id="lantern"></div>
         <div id="sliderContainer">
@@ -76,16 +82,52 @@
 
         </div>
 
+        <div id="sliderPanel">
+            <input type="checkbox" id="showTallest"><label class="panelLabel" for="showTallest">Show Tallest Screenshot</label><br/>
+            <input type="checkbox" id="showSmallest"><label class="panelLabel" for="showSmallest">Show Smallest Screenshot</label><br/>
+            <br/>
+            <br/>
+            <br/>
+            <button type="button" id="uploadButton" class="panelLabel">The Slider Doesn't Reach Me!</button>
+        </div>
+
         <div class="overlay">
             <h3>Drag near the side of the screenshot to resize it</h3>
             <h3>Once aligned, move the slider to the top of your head (not hair) to measure yourself!</h3>
-            <h3>Are you outside this range? Have other issues? DM <span class="discord">NathanWolf#7054</span> on Discord</h3>
+            <h3>Have issues or feedback? DM <span class="discord">NathanWolf#7054</span> on Discord</h3>
             <h3>Disclaimer: This is a work in progress, not affiliated with thatgamecompany in any way, numbers may not be accurate and do not necessarily reflect real game statistics.</h3>
         </div>
     </div>
 
     <div id="prompt">
         Click to continue
+    </div>
+
+    <div class="overlay">
+        <h3>
+            <a class="discordLink" href="https://discordapp.com/channels/575762611111592007/585339436322259003/733409326831501393">Updated (but still inaccurate!) chart available on Discord</a>
+        </h3>
+        <h3>
+            <a class="discordLink" href="https://discordapp.com/channels/575762611111592007/585339436322259003/664854703414181889">Original (very inaccurate) chart also available on Discord</a>
+        </h3>
+    </div>
+
+    <div id="dialogUploadConfirm" title="Upload your screenshot?" style="display: none">
+        <p>
+            <span class="ui-icon ui-icon-info" style="float:left; margin:12px 12px 20px 0;"></span>
+            Do you think you are taller than the tallest size on this chart?<br/>
+            Or maybe shorter than the shortest size?<br/><br/>
+            And definitely not wearing the Chibi mask or under the influence of any sizing potions?
+            <br/><br/>
+            Using default stance?<br/><br/>
+            If so, then wow! Congratulations!<br/>
+            <br/>
+            If you would like to make this tool more accurate, you can submit your screenshot!<br/>
+            <br/>
+            Please note that screenshots submitted here may be displayed on this website as proof of the max and min sizes.<br/>
+            <br/>
+            We appreciate your help in making this measuring tool the best it can be!
+        </p>
     </div>
 </body>
 

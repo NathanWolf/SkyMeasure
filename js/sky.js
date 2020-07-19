@@ -5,6 +5,9 @@ function initialize() {
     $('#previous').on('click', previousSlide);
     $('#skip').on('click', goToTool);
     $('#imageInput').change(readURL);
+    $('#uploadButton').button().on('click', uploadFile);
+    $('#showTallest').button().on('click', toggleTallest);
+    $('#showSmallest').button().on('click', toggleSmallest);
 
     $("#slider").slider({
       orientation: "vertical",
@@ -138,5 +141,38 @@ function resize(target, new_width, new_height){
     $wrapper.height( $wrapper.height() - dy );
 }
 
+function uploadFile() {
+    $("#dialogUploadConfirm").dialog({
+        resizable: false,
+        height: "auto",
+        width: 400,
+        modal: true,
+        buttons: {
+            "Upload Screenshot": function() {
+                $('#imageForm').submit();
+                $(this).dialog("close");
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+}
+
+function toggleTallest() {
+    if ($('#showTallest').is(':checked')) {
+        $('#tallestScreenshot').show();
+    } else {
+        $('#tallestScreenshot').hide();
+    }
+}
+
+function toggleSmallest() {
+    if ($('#showSmallest').is(':checked')) {
+        $('#smallestScreenshot').show();
+    } else {
+        $('#smallestScreenshot').hide();
+    }
+}
 
 $(document).ready(initialize);
