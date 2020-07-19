@@ -162,6 +162,7 @@ div#sliderPanel {
     border: 1px solid rgba(0,0,0,0.75);
     background: rgba(0,0,0,0.2);
     padding: 16px;
+    z-index: 11;
 }
 
 .panelLabel {
@@ -187,25 +188,27 @@ a.discordLink {
 div#smallestScreenshot {
     position: absolute;
     left: 50%;
-    margin-left: -100px;
-    top: 200px;
-    z-index: 9;
-    pointer-events: none;
-}
-
-div#tallestScreenshot {
-    position: absolute;
-    left: 50%;
-    margin-left: -100px;
-    top: 200px;
+    margin-left: -312px;
+    top: 199px;
     z-index: 9;
     pointer-events: none;
 }
 
 div#smallestScreenshot img {
-    opacity: 50%;
+    opacity: 75%;
+    width: 134%;
+}
+
+div#tallestScreenshot {
+    position: absolute;
+    left: 50%;
+    margin-left: -455px;
+    top: 200px;
+    z-index: 9;
+    pointer-events: none;
 }
 
 div#tallestScreenshot img {
-    opacity: 70%;
+    opacity: 90%;
+    width: 75%;
 }
