@@ -174,10 +174,10 @@ span.discord {
     color: #00AAFF;
 }
 
-.ui-resizable-handle{
+.ui-resizable-handle {
     width: 0;
     height: 0;
-    border: 8px solid rgba(0, 255, 0, 0.75);
+    border: 16px solid rgba(0, 255, 0, 0.75);
 }
 
 a.discordLink {
@@ -211,4 +211,8 @@ div#tallestScreenshot {
 div#tallestScreenshot img {
     opacity: 90%;
     width: 75%;
+}
+
+div.tips {
+    z-index: 12;
 }

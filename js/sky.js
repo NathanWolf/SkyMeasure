@@ -120,13 +120,17 @@ function readURL() {
 function screenshotReady() {
     $('#userImage').resizable({
         aspectRatio: true,
-        handles: 'n, e, s, w, ne, se, sw, nw'
+        handles: 'n, e, s, w, ne, se, sw, nw',
+        resize: updateHandles
     });
-    $('#screenshot').draggable();
+    $('#screenshot').draggable({
+        drag: updateHandles
+    });
     $('#screenshot').css('left', $('#lantern').position().left - 300);
 
     resize($('#userImage'), 600, 600 / $('#userImage').width() * $('#userImage').height());
     sliderMoved();
+    updateHandles();
 }
 
 function resize(target, new_width, new_height){
@@ -173,6 +177,31 @@ function toggleSmallest() {
     } else {
         $('#smallestScreenshot').hide();
     }
+}
+
+function updateHandles() {
+    let lantern = $('#lantern');
+    let screenshot = $('#screenshot');
+    let leftSide = lantern.position().left - 300;
+    let rightSide = lantern.position().left + lantern.width() + 300;
+    let topSide = lantern.position().top - 200;
+    let bottomSide = lantern.position().top + lantern.height() + 200;
+    let minSize = 16;
+
+    let topDelta = topSide - screenshot.position().top;
+    let bottomDelta = screenshot.position().top + screenshot.height() - bottomSide;
+    let leftDelta = leftSide - screenshot.position().left;
+    let rightDelta = screenshot.position().left + screenshot.width() - rightSide;
+
+    topDelta /= 2;
+    bottomDelta /= 2;
+    leftDelta /= 2;
+    rightDelta /= 2;
+
+    $('.ui-resizable-se').css('border-width', Math.max(minSize, rightDelta, bottomDelta));
+    $('.ui-resizable-ne').css('border-width', Math.max(minSize, rightDelta, topDelta));
+    $('.ui-resizable-sw').css('border-width', Math.max(minSize, leftDelta, bottomDelta));
+    $('.ui-resizable-nw').css('border-width', Math.max(minSize, leftDelta, topDelta));
 }
 
 $(document).ready(initialize);
