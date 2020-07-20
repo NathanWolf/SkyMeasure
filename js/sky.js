@@ -188,7 +188,7 @@ function updateHandles() {
     let bottomSide = lantern.position().top + lantern.height() + 200;
     let minSize = 16;
 
-    let topDelta = topSide - screenshot.position().top;
+    let topDelta = screenshot.position().top - topSide;
     let bottomDelta = screenshot.position().top + screenshot.height() - bottomSide;
     let leftDelta = leftSide - screenshot.position().left;
     let rightDelta = screenshot.position().left + screenshot.width() - rightSide;
