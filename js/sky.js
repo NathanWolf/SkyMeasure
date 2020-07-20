@@ -182,18 +182,22 @@ function toggleSmallest() {
 }
 
 function updateHandles() {
-    let lantern = $('#lantern');
-    let screenshot = $('#screenshot');
-    let leftSide = lantern.position().left - 300;
-    let rightSide = lantern.position().left + lantern.width() + 300;
-    let topSide = lantern.position().top - 200;
-    let bottomSide = lantern.position().top + lantern.height() + 200;
     let minSize = 16;
+    let lantern = $('#lantern');
+    let screenshot = $('#userImage');
+    let leftSide = lantern.offset().left - 300;
+    leftSide = Math.max(leftSide, minSize);
+    let rightSide = lantern.offset().left + lantern.width() + 300;
+    rightSide = Math.min(rightSide, window.innerWidth - minSize);
+    let bottomSide = lantern.offset().top + lantern.height() + 100;
+    bottomSide = Math.min(bottomSide, window.innerHeight - minSize);
+    let topSide = lantern.offset().top - 100;
+    topSide = Math.max(topSide, minSize);
 
-    let topDelta = screenshot.position().top - topSide;
-    let bottomDelta = screenshot.position().top + screenshot.height() - bottomSide;
-    let leftDelta = leftSide - screenshot.position().left;
-    let rightDelta = screenshot.position().left + screenshot.width() - rightSide;
+    let topDelta = topSide - screenshot.offset().top;
+    let bottomDelta = screenshot.offset().top + screenshot.height() - bottomSide;
+    let leftDelta = leftSide - screenshot.offset().left;
+    let rightDelta = screenshot.offset().left + screenshot.width() - rightSide;
 
     topDelta /= 2;
     bottomDelta /= 2;

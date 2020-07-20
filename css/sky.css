@@ -148,10 +148,10 @@ div#sliderContainer {
 div#sliderLine {
     border-top: 2px solid red;
     height: 1px;
-    width: 400px;
+    width: 500px;
     position: absolute;
     left: 50%;
-    margin-left: -300px;
+    margin-left: -400px;
     z-index: 20;
 }
 
@@ -178,7 +178,8 @@ span.discord {
 .ui-resizable-handle {
     width: 0;
     height: 0;
-    border: 16px solid rgba(0, 255, 0, 0.75);
+    border: 16px solid rgba(0, 200, 255, 0.5);
+    background-image: url(../image/blank.png) !important;
 }
 
 a.discordLink {
