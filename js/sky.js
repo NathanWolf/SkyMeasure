@@ -10,12 +10,13 @@ function initialize() {
     $('#showSmallest').button().on('click', toggleSmallest);
 
     $("#slider").slider({
-      orientation: "vertical",
-      range: "min",
-      min: 0,
-      max: 4000,
-      value: 40000,
-      slide: sliderMoved
+        orientation: "vertical",
+        range: "min",
+        min: 0,
+        max: 4000,
+        value: 4000,
+        slide: sliderMoved,
+        stop: sliderMoved
     });
     $("#size").text($("#slider").slider("value"));
 
@@ -30,9 +31,10 @@ function initialize() {
     startPromptTimer();
 }
 
-function sliderMoved() {
+function sliderMoved(event, ui) {
     let slider = $("#slider");
-    $("#size").text(slider.slider('value'));
+    let value = ui ? ui.value : slider.slider('value')
+    $("#size").text(value);
     let thumb = slider.children('.ui-slider-handle');
     let position = $('#sliderContainer').position().top + thumb.position().top;
     position = position + 10;
