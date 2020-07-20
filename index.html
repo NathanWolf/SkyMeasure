@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="image/favicon.png" type="image/png" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/sky.css?v=4">
+    <link rel="stylesheet" href="css/sky.css?v=5">
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -68,10 +68,16 @@
             <img id="userImage" alt="Your screenshot" src="image/blank.png"/>
         </div>
         <div id="smallestScreenshot" style="display:none">
-            <img alt="Smallest Screenshot" src="image/smallest.jpg?v=1"/>
+            <img alt="Smallest Screenshot" src="image/smallest.jpg?v=2"/>
         </div>
         <div id="tallestScreenshot" style="display:none">
             <img alt="Tallest Screenshot" src="image/tallest.jpg?v=1"/>
+        </div>
+        <div id="hugeScreenshot" style="display:none">
+            <img alt="Huge Screenshot" src="image/huge.jpg?v=1"/>
+        </div>
+        <div id="tinyScreenshot" style="display:none">
+            <img alt="Tiny Screenshot" src="image/tiny.jpg?v=1"/>
         </div>
         <div id="lantern"></div>
         <div id="sliderContainer">
@@ -83,8 +89,10 @@
         </div>
 
         <div id="sliderPanel">
+            <input type="checkbox" id="showHuge"><label class="panelLabel" for="showHuge">Show Huge Screenshot</label><br/>
             <input type="checkbox" id="showTallest"><label class="panelLabel" for="showTallest">Show Tallest Screenshot</label><br/>
             <input type="checkbox" id="showSmallest"><label class="panelLabel" for="showSmallest">Show Smallest Screenshot</label><br/>
+            <input type="checkbox" id="showTiny"><label class="panelLabel" for="showTiny">Show Tiny Screenshot</label><br/>
             <br/>
             <br/>
             <br/>

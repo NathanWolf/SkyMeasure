@@ -6,6 +6,8 @@ function initialize() {
     $('#skip').on('click', goToTool);
     $('#imageInput').change(readURL);
     $('#uploadButton').button().on('click', uploadFile);
+    $('#showHuge').button().on('click', toggleHuge);
+    $('#showTiny').button().on('click', toggleTiny);
     $('#showTallest').button().on('click', toggleTallest);
     $('#showSmallest').button().on('click', toggleSmallest);
 
@@ -181,18 +183,34 @@ function toggleSmallest() {
     }
 }
 
+function toggleTiny() {
+    if ($('#showTiny').is(':checked')) {
+        $('#tinyScreenshot').show();
+    } else {
+        $('#tinyScreenshot').hide();
+    }
+}
+
+function toggleHuge() {
+    if ($('#showHuge').is(':checked')) {
+        $('#hugeScreenshot').show();
+    } else {
+        $('#hugeScreenshot').hide();
+    }
+}
+
 function updateHandles() {
-    let minSize = 16;
+    let minSize = 32;
     let lantern = $('#lantern');
     let screenshot = $('#userImage');
     let leftSide = lantern.offset().left - 300;
-    leftSide = Math.max(leftSide, minSize);
+    leftSide = Math.max(leftSide, minSize * 2);
     let rightSide = lantern.offset().left + lantern.width() + 300;
-    rightSide = Math.min(rightSide, window.innerWidth - minSize);
+    rightSide = Math.min(rightSide, window.innerWidth - minSize * 2);
     let bottomSide = lantern.offset().top + lantern.height() + 100;
-    bottomSide = Math.min(bottomSide, window.innerHeight - minSize);
+    bottomSide = Math.min(bottomSide, window.innerHeight - minSize * 2);
     let topSide = lantern.offset().top - 100;
-    topSide = Math.max(topSide, minSize);
+    topSide = Math.max(topSide, minSize * 2);
 
     let topDelta = topSide - screenshot.offset().top;
     let bottomDelta = screenshot.offset().top + screenshot.height() - bottomSide;

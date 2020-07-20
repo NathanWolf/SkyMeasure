@@ -192,12 +192,12 @@ div#smallestScreenshot {
     left: 50%;
     margin-left: -312px;
     top: 199px;
-    z-index: 9;
+    z-index: 5;
     pointer-events: none;
 }
 
 div#smallestScreenshot img {
-    opacity: 75%;
+    opacity: 80%;
     width: 134%;
 }
 
@@ -206,13 +206,41 @@ div#tallestScreenshot {
     left: 50%;
     margin-left: -455px;
     top: 200px;
-    z-index: 9;
+    z-index: 3;
     pointer-events: none;
 }
 
 div#tallestScreenshot img {
-    opacity: 90%;
+    opacity: 80%;
     width: 75%;
+}
+
+div#hugeScreenshot {
+    position: absolute;
+    left: 50%;
+    margin-left: -356px;
+    top: 45px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+div#hugeScreenshot img {
+    opacity: 80%;
+    width: 115%;
+}
+
+div#tinyScreenshot {
+    position: absolute;
+    left: 50%;
+    margin-left: -254px;
+    top: 111px;
+    z-index: 7;
+    pointer-events: none;
+}
+
+div#tinyScreenshot img {
+    opacity: 80%;
+    width: 81%;
 }
 
 div.tips {
