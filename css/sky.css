@@ -142,6 +142,7 @@ div#sliderContainer {
     left: 50%;
     top: 330px;
     margin-left: 120px;
+    z-index: 100;
 }
 
 div#sliderLine {
