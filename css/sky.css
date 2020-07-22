@@ -243,6 +243,66 @@ div#tinyScreenshot img {
     width: 81%;
 }
 
+div#childScreenshot {
+    position: absolute;
+    left: 50%;
+    margin-left: -270px;
+    top: 153px;
+    z-index: 7;
+    pointer-events: none;
+}
+
+div#childScreenshot img {
+    opacity: 80%;
+    width: 59%;
+}
+
+div#growScreenshot {
+    position: absolute;
+    left: 50%;
+    margin-left: -306px;
+    top: 112px;
+    z-index: 7;
+    pointer-events: none;
+}
+
+div#growScreenshot img {
+    opacity: 80%;
+    width: 53%;
+}
+
+div#shrinkScreenshot {
+    position: absolute;
+    left: 50%;
+    margin-left: -254px;
+    top: 133px;
+    z-index: 7;
+    pointer-events: none;
+}
+
+div#shrinkScreenshot img {
+    opacity: 80%;
+    width: 67%;
+}
+
+div#officialChart {
+    position: absolute;
+    left: 50%;
+    margin-left: -424px;
+    top: 122px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+div#officialChart img {
+    opacity: 80%;
+    width: 135%;
+}
+
 div.tips {
     z-index: 12;
+}
+
+div#screenshotContainer {
+    min-height: 650px;
 }

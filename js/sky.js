@@ -10,6 +10,11 @@ function initialize() {
     $('#showTiny').button().on('click', toggleTiny);
     $('#showTallest').button().on('click', toggleTallest);
     $('#showSmallest').button().on('click', toggleSmallest);
+    $('#showChild').button().on('click', toggleChild);
+    $('#showGrow').button().on('click', toggleGrow);
+    $('#showShrink').button().on('click', toggleShrink);
+    $('#showOfficial').button().on('click', toggleOfficial);
+    $('#showScreenshot').button().on('click', toggleScreenshot);
 
     $("#slider").slider({
         orientation: "vertical",
@@ -35,7 +40,10 @@ function initialize() {
 
 function sliderMoved(event, ui) {
     let slider = $("#slider");
-    let value = ui ? ui.value : slider.slider('value')
+    let value = ui ? ui.value : slider.slider('value');
+
+    value = ((value - 2000) / 1000).toFixed(2);
+
     $("#size").text(value);
     let thumb = slider.children('.ui-slider-handle');
     let position = $('#sliderContainer').position().top + thumb.position().top;
@@ -167,36 +175,48 @@ function uploadFile() {
     });
 }
 
-function toggleTallest() {
-    if ($('#showTallest').is(':checked')) {
-        $('#tallestScreenshot').show();
+function toggle(checkbox, container) {
+    if (checkbox.is(':checked')) {
+        container.show();
     } else {
-        $('#tallestScreenshot').hide();
+        container.hide();
     }
+}
+
+function toggleTallest() {
+    toggle($('#showTallest'), $('#tallestScreenshot'));
 }
 
 function toggleSmallest() {
-    if ($('#showSmallest').is(':checked')) {
-        $('#smallestScreenshot').show();
-    } else {
-        $('#smallestScreenshot').hide();
-    }
+    toggle($('#showSmallest'), $('#smallestScreenshot'));
 }
 
 function toggleTiny() {
-    if ($('#showTiny').is(':checked')) {
-        $('#tinyScreenshot').show();
-    } else {
-        $('#tinyScreenshot').hide();
-    }
+    toggle($('#showTiny'), $('#tinyScreenshot'));
 }
 
 function toggleHuge() {
-    if ($('#showHuge').is(':checked')) {
-        $('#hugeScreenshot').show();
-    } else {
-        $('#hugeScreenshot').hide();
-    }
+    toggle($('#showHuge'), $('#hugeScreenshot'));
+}
+
+function toggleChild() {
+    toggle($('#showChild'), $('#childScreenshot'));
+}
+
+function toggleGrow() {
+    toggle($('#showGrow'), $('#growScreenshot'));
+}
+
+function toggleShrink() {
+    toggle($('#showShrink'), $('#shrinkScreenshot'));
+}
+
+function toggleOfficial() {
+    toggle($('#showOfficial'), $('#officialChart'));
+}
+
+function toggleScreenshot() {
+    toggle($('#showScreenshot'), $('#screenshot'));
 }
 
 function updateHandles() {
