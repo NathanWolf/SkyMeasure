@@ -260,15 +260,15 @@ div#childScreenshot img {
 div#growScreenshot {
     position: absolute;
     left: 50%;
-    margin-left: -306px;
-    top: 112px;
+    margin-left: -310px;
+    top: 108px;
     z-index: 7;
     pointer-events: none;
 }
 
 div#growScreenshot img {
     opacity: 80%;
-    width: 53%;
+    width: 51.5%;
 }
 
 div#shrinkScreenshot {
