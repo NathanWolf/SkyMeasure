@@ -21,7 +21,7 @@ function initialize() {
         range: "min",
         min: 0,
         max: 4000,
-        value: 4000,
+        value: 2000,
         slide: sliderMoved,
         stop: sliderMoved
     });
@@ -42,7 +42,13 @@ function sliderMoved(event, ui) {
     let slider = $("#slider");
     let value = ui ? ui.value : slider.slider('value');
 
-    value = ((value - 2000) / 1000).toFixed(2);
+    if (value == 0 || value == 4000) {
+        flashSubmitButton();
+    } else {
+        stopFlashSubmitButton();
+    }
+
+    value = ((value - 2000) / 1000).toFixed(3);
 
     $("#size").text(value);
     let thumb = slider.children('.ui-slider-handle');
@@ -246,6 +252,44 @@ function updateHandles() {
     $('.ui-resizable-ne').css('border-width', Math.max(minSize, rightDelta, topDelta));
     $('.ui-resizable-sw').css('border-width', Math.max(minSize, leftDelta, bottomDelta));
     $('.ui-resizable-nw').css('border-width', Math.max(minSize, leftDelta, topDelta));
+}
+
+var _submitFlashTimer = null;
+var _submitIsHighlighted = false;
+function highlightSubmitButton() {
+    $('#uploadButton').css('background-color', 'red')
+    $('#uploadButton').css('color', 'white');
+    _submitIsHighlighted = true;
+}
+
+function unhighlightSubmitButton() {
+    $('#uploadButton').css('background-color', 'white')
+    $('#uploadButton').css('color', 'black');
+    _submitIsHighlighted = false;
+}
+
+function scheduleFlashSubmitButton() {
+    _submitFlashTimer = setTimeout(function() {
+        if (_submitIsHighlighted) {
+            unhighlightSubmitButton();
+        } else {
+            highlightSubmitButton();
+        }
+        scheduleFlashSubmitButton();
+    }, 1000);
+}
+
+function flashSubmitButton() {
+    stopFlashSubmitButton();
+    highlightSubmitButton();
+    scheduleFlashSubmitButton();
+}
+
+function stopFlashSubmitButton() {
+    if (_submitFlashTimer != null) {
+        clearTimeout(_submitFlashTimer);
+    }
+    unhighlightSubmitButton();
 }
 
 $(document).ready(initialize);
