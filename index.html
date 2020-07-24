@@ -5,12 +5,12 @@
     <link rel="shortcut icon" href="image/favicon.png" type="image/png" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/sky.css?v=8">
+    <link rel="stylesheet" href="css/sky.css?v=9">
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>
-    <script src="js/sky.js?v=5"></script>
+    <script src="js/sky.js?v=6"></script>
 
 </head>
 <body>
@@ -114,6 +114,9 @@
             <input type="checkbox" id="showTiny"><label class="panelLabel" for="showTiny">Tiny Spell</label><br/>
             <br/>
             <br/>
+            <button type="button" id="statsButton" class="panelLabel">Show Me Some Stats!</button>
+            <br/>
+            <br/>
             <br/>
             <button type="button" id="uploadButton" class="panelLabel">The Slider Doesn't Reach Me!</button>
         </div>
@@ -161,6 +164,31 @@
             Please note that screenshots submitted here may be displayed on this website as proof of the max and min sizes.<br/>
             <br/>
             We appreciate your help in making this measuring tool the best it can be!
+        </p>
+    </div>
+
+    <div id="dialogStats" title="Some Stats For You" style="display: none">
+        <p>
+            You are in the <span id="stats_percentile"></span> percentile for <span id="stats_percentileType"></span>.
+            <br/><br/>
+            If you would like to get <span id="stats_nextType"></span>, here are some stats to give you an idea of what it's going to take:
+            <br/><br/>
+            If you use <span id="stats_potions1"></span> resize potions, you have a <span id="stats_chance1"></span>% chance of getting
+            <span id="stats_type1"></span><br/>
+            If you use <span id="stats_potions2"></span> resize potions, you have a <span id="stats_chance2"></span>% chance of getting
+            <span id="stats_type2"></span><br/>
+            If you use <span id="stats_potions3"></span> resize potions, you have a <span id="stats_chance3"></span>% chance of getting
+            <span id="stats_type3"></span><br/>
+            If you use <span id="stats_potions4"></span> resize potions, you have a <span id="stats_chance4"></span>% chance of getting
+            <span id="stats_type4"></span><br/>
+        </p>
+    </div>
+
+    <div id="dialogMiddleStats" title="Some Stats For You" style="display: none">
+        <p>
+            You are right in the middle, neither short nor tall.
+            <br/><br/>
+            Not much I can do with that, stats-wise. Sorry!
         </p>
     </div>
 </body>

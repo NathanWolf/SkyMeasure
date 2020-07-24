@@ -158,7 +158,7 @@ div#sliderLine {
 div#sliderPanel {
     position: absolute;
     left: 50%;
-    top: 330px;
+    top: 200px;
     margin-left: 200px;
     border: 1px solid rgba(0,0,0,0.75);
     background: rgba(0,0,0,0.2);
@@ -305,4 +305,12 @@ div.tips {
 
 div#screenshotContainer {
     min-height: 650px;
+}
+
+button.panelLabel {
+    width: 230px;
+}
+
+span#stats_percentile {
+    font-weight: bold;
 }

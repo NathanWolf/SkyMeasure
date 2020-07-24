@@ -15,6 +15,7 @@ function initialize() {
     $('#showShrink').button().on('click', toggleShrink);
     $('#showOfficial').button().on('click', toggleOfficial);
     $('#showScreenshot').button().on('click', toggleScreenshot);
+    $('#statsButton').button().on('click', showStats);
 
     $("#slider").slider({
         orientation: "vertical",
@@ -44,8 +45,10 @@ function sliderMoved(event, ui) {
 
     if (value == 0 || value == 4000) {
         flashSubmitButton();
+        $('#statsButton').button('disable');
     } else {
         stopFlashSubmitButton();
+        $('#statsButton').button('enable');
     }
 
     value = ((value - 2000) / 1000).toFixed(3);
@@ -175,6 +178,78 @@ function uploadFile() {
                 $(this).dialog("close");
             },
             Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+}
+
+function percentile(percent) {
+   let digit = percent % 10;
+   switch (digit) {
+       case 1: percent += 'st'; break;
+       case 2: percent += 'nd'; break;
+       case 3: percent += 'rd'; break;
+       default: percent += 'th'; break;
+   }
+   return percent;
+}
+
+var _potionAttempts = [3, 9, 20, 50];
+function showStats() {
+    let statsDialog = '#dialogStats';
+    let slider = $("#slider");
+    let value = slider.slider('value');
+    if (value < 2050 && value > 1950) {
+        statsDialog = '#dialogMiddleStats';
+    } else {
+       if (value > 2000) {
+           let percent = Math.round(100 * (value - 2000) / 2000);
+           percent = percentile(percent);
+           $('#stats_percentileType').text('tallness');
+           $('#stats_percentile').text(percent);
+           $('#stats_nextType').text('taller');
+
+           for (let i = 0; i < _potionAttempts.length; i++) {
+               let attempts = _potionAttempts[i];
+               let index = i + 1;
+               let chance = ((value - 2000) / 2000);
+               chance = Math.pow(chance, attempts);
+               chance = Math.floor((100 * (1 - chance))).toFixed(0);
+               if (chance == 100) chance = 99;
+               $('#stats_potions' + index).text(attempts);
+               $('#stats_chance' + index).text(chance);
+               $('#stats_type' + index).text('taller');
+           }
+       } else if (value < 2000) {
+           value = 4000 - value;
+           let percent = Math.round(100 * (value - 2000) / 2000);
+           percent = percentile(percent);
+           $('#stats_percentileType').text('smallness');
+           $('#stats_percentile').text(percent);
+           $('#stats_nextType').text('shorter');
+
+           for (let i = 0; i < _potionAttempts.length; i++) {
+               let attempts = _potionAttempts[i];
+               let index = i + 1;
+               let chance = ((value - 2000) / 2000);
+               chance = Math.pow(chance, attempts);
+               chance = Math.floor((100 * (1 - chance))).toFixed(0);
+               if (chance == 100) chance = 99;
+               $('#stats_potions' + index).text(attempts);
+               $('#stats_chance' + index).text(chance);
+               $('#stats_type' + index).text('shorter');
+           }
+       }
+    }
+
+    $(statsDialog).dialog({
+        resizable: false,
+        height: "auto",
+        width: 500,
+        modal: true,
+        buttons: {
+            OK: function() {
                 $(this).dialog("close");
             }
         }
