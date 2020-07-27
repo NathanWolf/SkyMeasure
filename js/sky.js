@@ -174,8 +174,22 @@ function uploadFile() {
         modal: true,
         buttons: {
             "Upload Screenshot": function() {
-                $('#imageForm').submit();
                 $(this).dialog("close");
+                $("#dialogUploadReallyConfirm").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Yes, Really Upload Screenshot": function() {
+                            $('#imageForm').submit();
+                            $(this).dialog("close");
+                        },
+                        Cancel: function() {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
             },
             Cancel: function() {
                 $(this).dialog("close");
