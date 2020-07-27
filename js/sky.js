@@ -51,14 +51,12 @@ function sliderMoved(event, ui) {
         $('#statsButton').button('enable');
     }
 
-    value = ((value - 2000) / 1000).toFixed(3);
-
-    $("#size").text(value);
-    let thumb = slider.children('.ui-slider-handle');
-    let position = $('#sliderContainer').position().top + thumb.position().top;
-    position = position + 10;
+    let position = $('#sliderContainer').position().top + $('#sliderContainer').height() * (4000 - value) / 4000;
     $('#sliderLine').css('top', position);
     $('#size').css('top', position);
+
+    value = ((value - 2000) / 1000).toFixed(3);
+    $("#size").text(value);
 }
 
 var _slides = [];
