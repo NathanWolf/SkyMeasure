@@ -70,9 +70,10 @@ div.overlay {
 }
 
 div#skip {
-    margin-left: 360px;
+    margin-left: 380px;
+    margin-top: -10px;
     border-radius: 50%;
-    border: 8px solid white;
+    border: 16px solid white;
     background-color: rgba(255,255,255,0.9);
     position: absolute;
     left: 50%;
@@ -80,9 +81,10 @@ div#skip {
 }
 
 div#previous {
-    margin-left: -350px;
+    margin-left: -360px;
+    margin-top: -10px;
     border-radius: 50%;
-    border: 8px solid white;
+    border: 16px solid white;
     background-color: rgba(255,255,255,0.9);
     position: absolute;
     left: 50%;
@@ -91,8 +93,9 @@ div#previous {
 
 div#next {
     margin-left: 320px;
+    margin-top: -10px;
     border-radius: 50%;
-    border: 8px solid white;
+    border: 16px solid white;
     background-color: rgba(255,255,255,0.9);
     position: absolute;
     left: 50%;
