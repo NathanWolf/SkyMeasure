@@ -332,15 +332,17 @@ function updateHandles() {
     let leftDelta = leftSide - screenshot.offset().left;
     let rightDelta = screenshot.offset().left + screenshot.width() - rightSide;
 
-    topDelta /= 2;
-    bottomDelta /= 2;
-    leftDelta /= 2;
-    rightDelta /= 2;
+    $('.ui-resizable-se').css('border-right-width', Math.max(minSize, rightDelta));
+    $('.ui-resizable-se').css('border-top-width', Math.max(minSize, bottomDelta));
 
-    $('.ui-resizable-se').css('border-width', Math.max(minSize, rightDelta, bottomDelta));
-    $('.ui-resizable-ne').css('border-width', Math.max(minSize, rightDelta, topDelta));
-    $('.ui-resizable-sw').css('border-width', Math.max(minSize, leftDelta, bottomDelta));
-    $('.ui-resizable-nw').css('border-width', Math.max(minSize, leftDelta, topDelta));
+    $('.ui-resizable-ne').css('border-right-width', Math.max(minSize, rightDelta));
+    $('.ui-resizable-ne').css('border-bottom-width', Math.max(minSize, topDelta));
+
+    $('.ui-resizable-sw').css('border-left-width', Math.max(minSize, leftDelta));
+    $('.ui-resizable-sw').css('border-top-width', Math.max(minSize, bottomDelta));
+
+    $('.ui-resizable-nw').css('border-left-width', Math.max(minSize, leftDelta));
+    $('.ui-resizable-nw').css('border-bottom-width', Math.max(minSize, topDelta));
 }
 
 var _submitFlashTimer = null;
