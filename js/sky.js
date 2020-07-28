@@ -151,6 +151,8 @@ function screenshotReady() {
     resize($('#userImage'), 600, 600 / $('#userImage').width() * $('#userImage').height());
     sliderMoved();
     updateHandles();
+    flashAlignButtonButton();
+    $('#autoAlignButton').button('enable');
 }
 
 function resize(target, new_width, new_height){
@@ -423,13 +425,28 @@ function processAlignResult(result, resultType) {
     let targetWidth = screenshot.get(0).naturalWidth * scale;
 
     // This is really fudgy, and I'm not sure why yet
+    let targetTop = $('#lantern').position().top - alignedLantern.top * scale - $('#lantern').height() / 4 - 8
     container.css('left', $('#lantern').position().left - alignedLantern.left * scale - $('#lantern').width() / 2 - 8);
-    container.css('top', $('#lantern').position().top - alignedLantern.top * scale - $('#lantern').height() / 4 - 8);
+    container.css('top', targetTop);
 
     resize(screenshot, targetWidth, targetWidth / screenshot.width() * screenshot.height());
 
+    const heightRangeInPixels = $('#sliderContainer').height();
+    const sliderTop = $('#sliderContainer').position().top;
+    const cowlickHeight = 23;
+    const alignedHair = result.responseJSON.hair;
+    let hairTop = container.position().top + alignedHair.top * scale  + cowlickHeight;
+    let heightValue = 4000 - ((hairTop - sliderTop) / heightRangeInPixels * 4000);
+    heightValue = Math.max(heightValue, 0);
+    heightValue = Math.min(heightValue, 4000);
+    $('#slider').slider('value', heightValue);
+
     sliderMoved();
     updateHandles();
+}
+
+function flashAlignButtonButton() {
+    $('#autoAlignButton').effect("pulsate", { times: 2 }, 4000);
 }
 
 

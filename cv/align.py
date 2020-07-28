@@ -12,15 +12,16 @@ import imutils
 import cv2
 import json
 import sys
+import os
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-t", "--template", required=True, help="Path to template image")
 ap.add_argument("-i", "--image", required=True, help="Path to the image where template will be matched")
 args = vars(ap.parse_args())
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 # load the image image, convert it to grayscale, and detect edges
-template = cv2.imread(args["template"])
+template = cv2.imread(os.path.join(__location__, 'lantern.png'))
 template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
 template = cv2.Canny(template, 50, 200)
 (tH, tW) = template.shape[:2]
@@ -37,7 +38,7 @@ found = None
 for scale in np.linspace(0.2, 2.0, 20)[::-1]:
 	# resize the image according to the scale, and keep track
 	# of the ratio of the resizing
-	resized = imutils.resize(gray, width = int(gray.shape[1] * scale))
+	resized = imutils.resize(gray, int(gray.shape[1] * scale))
 	r = gray.shape[1] / float(resized.shape[1])
 
 	# if the resized image is smaller than the template, then break
@@ -67,7 +68,7 @@ if found is None:
 (startX, startY) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
 (endX, endY) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
 
-# draw a bounding box around the detected result and display the image
+# Build results
 results = {'success': True}
 results['lantern'] = {
 	'left': startX,
@@ -77,4 +78,31 @@ results['lantern'] = {
 	'scale': r,
 	'correlation': correlation
 }
-print(json.dumps(results));
+
+# Use the same scale to find the hair
+# Yes this should be put in a function, would be good to refactor this later.
+
+template = cv2.imread(os.path.join(__location__, 'hair.png'))
+template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+template = cv2.Canny(template, 50, 200)
+(tH, tW) = template.shape[:2]
+
+resized = imutils.resize(gray, int(gray.shape[1] / r))
+
+edged = cv2.Canny(resized, 50, 200)
+result = cv2.matchTemplate(edged, template, cv2.TM_CCOEFF)
+(_, correlation, _, location) = cv2.minMaxLoc(result)
+
+(startX, startY) = (int(location[0] * r), int(location[1] * r))
+(endX, endY) = (int((location[0] + tW) * r), int((location[1] + tH) * r))
+
+results['hair'] = {
+	'left': startX,
+	'top': startY,
+	'right': endX,
+	'bottom': endY,
+	'scale': r,
+	'correlation': correlation
+}
+
+print(json.dumps(results))
