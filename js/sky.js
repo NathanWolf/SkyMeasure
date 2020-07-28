@@ -16,6 +16,7 @@ function initialize() {
     $('#showOfficial').button().on('click', toggleOfficial);
     $('#showScreenshot').button().on('click', toggleScreenshot);
     $('#statsButton').button().on('click', showStats);
+    $('#autoAlignButton').button().on('click', autoAlignImage);
 
     $("#slider").slider({
         orientation: "vertical",
@@ -380,5 +381,56 @@ function stopFlashSubmitButton() {
     }
     unhighlightSubmitButton();
 }
+
+function autoAlignImage() {
+    $('#autoAlignButton').button('disable');
+    $('#loadingScreen').show();
+
+    let form = $('#imageForm')[0];
+    let formData = new FormData(form);
+
+    $.ajax('align.php', {
+        complete: processAlignResult,
+        data: formData,
+        processData: false,
+        contentType: false,
+        method: 'POST',
+        dataType: 'json'
+    });
+}
+
+function processAlignResult(result, resultType) {
+    $('#loadingScreen').hide();
+    if (resultType != 'success') {
+        alert('Sorry, something went wrong with the auto-align: ' + resultType);
+        return;
+    }
+    if (result.responseJSON == null) {
+        alert('Sorry, something went wrong with the auto-align (Missing responseJSON)');
+        return;
+    }
+
+    if (!result.responseJSON.success) {
+        alert('Sorry, something went wrong with the auto-align: ' + result.responseJSON.message);
+        return;
+    }
+
+    const alignedLantern = result.responseJSON.lantern;
+    const scale = 1 / alignedLantern.scale;
+
+    let screenshot = $('#userImage');
+    let container = $('#screenshot');
+    let targetWidth = screenshot.get(0).naturalWidth * scale;
+
+    // This is really fudgy, and I'm not sure why yet
+    container.css('left', $('#lantern').position().left - alignedLantern.left * scale - $('#lantern').width() / 2 - 8);
+    container.css('top', $('#lantern').position().top - alignedLantern.top * scale - $('#lantern').height() / 4 - 8);
+
+    resize(screenshot, targetWidth, targetWidth / screenshot.width() * screenshot.height());
+
+    sliderMoved();
+    updateHandles();
+}
+
 
 $(document).ready(initialize);

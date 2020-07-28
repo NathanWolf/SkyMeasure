@@ -323,3 +323,21 @@ span#stats_percentile {
     width: 30px;
     margin-left: -7px;
 }
+
+#loadingScreen {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba(0, 0, 0, 0.8)
+                url('http://i.stack.imgur.com/FhHRx.gif')
+                50% 50%
+                no-repeat;
+}
+
+#autoAlignButton {
+    background-color: #CCCCFF;
+}
