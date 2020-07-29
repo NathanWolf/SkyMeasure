@@ -63,6 +63,11 @@ foreach ($iterator as $fileInfo) {
     $lanternSize = $response['lantern']['bottom'] - $response['lantern']['top'];
     $hairRatio = ($response['hair']['top'] - $response['lantern']['top']) / $lanternSize;
     $hairRatio = floor($hairRatio * 1000);
+    if ($hairRatio < 0) {
+        echo "Hair is out of range, skipping\n";
+        continue;
+    }
+    $hairRatio = str_pad($hairRatio, 5, '0', STR_PAD_LEFT);
     $targetFile = $targetFolder . $hairRatio . '_' . $filename;
 
     $sourceWidth = $right - $left;
