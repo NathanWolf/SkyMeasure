@@ -21,11 +21,14 @@ args = vars(ap.parse_args())
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 # load the image image, convert it to grayscale, and detect edges
-template = cv2.imread(os.path.join(__location__, 'lantern.png'))
-template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
-template = cv2.Canny(template, 50, 200)
-(tH, tW) = template.shape[:2]
+def loadTemplate(filename):
+	template = cv2.imread(os.path.join(__location__, filename))
+	template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+	template = cv2.Canny(template, 50, 200)
+	(tH, tW) = template.shape[:2]
+	return (template, tH, tW)
 
+(template, tH, tW) = loadTemplate('lantern.png')
 imagePath = args["image"];
 
 # load the image, convert it to grayscale, and initialize the
@@ -34,17 +37,15 @@ image = cv2.imread(imagePath)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 found = None
 
-# loop over the scales of the image
-for scale in np.linspace(0.2, 2.0, 20)[::-1]:
-	# resize the image according to the scale, and keep track
-	# of the ratio of the resizing
-	resized = imutils.resize(gray, int(gray.shape[1] * scale))
-	r = gray.shape[1] / float(resized.shape[1])
+def match(image, template, scale):
+	(tH, tW) = template.shape[:2]
+	resized = imutils.resize(image, int(gray.shape[1] * scale))
+	r = image.shape[1] / float(resized.shape[1])
 
 	# if the resized image is smaller than the template, then break
 	# from the loop
 	if resized.shape[0] < tH or resized.shape[1] < tW:
-		break
+		return None
 
 	# detect edges in the resized, grayscale image and apply template
 	# matching to find the template in the image
@@ -52,10 +53,18 @@ for scale in np.linspace(0.2, 2.0, 20)[::-1]:
 	result = cv2.matchTemplate(edged, template, cv2.TM_CCOEFF)
 	(_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
 
+	return (maxVal, maxLoc, r)
+
+# loop over the scales of the image
+for scale in np.linspace(0.2, 2.0, 20)[::-1]:
+	result = match(gray, template, scale)
+	if result is None:
+		break
+
 	# if we have found a new maximum correlation value, then update
 	# the bookkeeping variable
-	if found is None or maxVal > found[0]:
-		found = (maxVal, maxLoc, r)
+	if found is None or result[0] > found[0]:
+		found = result
 
 if found is None:
 	results = {'success': False, 'message': 'Could not align images'}
@@ -80,21 +89,8 @@ results['lantern'] = {
 }
 
 # Use the same scale to find the hair
-# Yes this should be put in a function, would be good to refactor this later.
-
-template = cv2.imread(os.path.join(__location__, 'hair.png'))
-template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
-template = cv2.Canny(template, 50, 200)
-(tH, tW) = template.shape[:2]
-
-resized = imutils.resize(gray, int(gray.shape[1] / r))
-
-edged = cv2.Canny(resized, 50, 200)
-result = cv2.matchTemplate(edged, template, cv2.TM_CCOEFF)
-(_, correlation, _, location) = cv2.minMaxLoc(result)
-
-(startX, startY) = (int(location[0] * r), int(location[1] * r))
-(endX, endY) = (int((location[0] + tW) * r), int((location[1] + tH) * r))
+(template, tH, tW) = loadTemplate('hair.png')
+(correlation, location, _) = match(gray, template, 1 / r)
 
 results['hair'] = {
 	'left': startX,
