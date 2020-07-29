@@ -293,7 +293,7 @@ div#slideshow {
     left: 50%;
     margin-left: -268px;
     top: 176px;
-    z-index: 12;
+    z-index: 1000;
     pointer-events: none;
 }
 
