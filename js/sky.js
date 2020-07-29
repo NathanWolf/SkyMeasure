@@ -385,7 +385,9 @@ function stopFlashSubmitButton() {
 }
 
 function autoAlignImage() {
-    $('#autoAlignButton').button('disable');
+    if (!_debugMode) {
+        $('#autoAlignButton').button('disable');
+    }
     $('#loadingScreen').show();
 
     let form = $('#imageForm')[0];
@@ -446,8 +448,13 @@ function processAlignResult(result, resultType) {
 }
 
 function flashAlignButtonButton() {
-    $('#autoAlignButton').effect("pulsate", { times: 2 }, 4000);
+    $('#autoAlignButton').effect("pulsate", { times: 2 }, 2000);
 }
 
+var _debugMode= false;
+function enableDebug() {
+    _debugMode = true;
+    $('#autoAlignButton').button('enable');
+}
 
 $(document).ready(initialize);
