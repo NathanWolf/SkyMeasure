@@ -57,7 +57,7 @@ def match(image, template, scale):
 
 # loop over the scales of the image
 # Use broad strokes here to find the general range
-for scale in np.linspace(0.1, 3.1, 10)[::-1]:
+for scale in np.linspace(0.1, 3.1, 30)[::-1]:
 	result = match(gray, template, scale)
 	if result is None:
 		break
@@ -73,9 +73,9 @@ if found is None:
 	sys.exit()
 
 # Now use a tighter loop around the result to narrow in on a scale
-# the first loop steps in 0.3 increments, so we will do 10 steps of 0.03 above and below
+# the first loop steps in 0.1 increments, so we will do 10 steps of 0.01 above and below
 (_, _, broadScale) = found
-for scale in np.linspace(broadScale - 0.15, broadScale + 0.15, 10)[::-1]:
+for scale in np.linspace(broadScale - 0.01, broadScale + 0.01, 10)[::-1]:
 	result = match(gray, template, scale)
 	if result is None:
 		break
