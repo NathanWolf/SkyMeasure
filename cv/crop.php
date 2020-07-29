@@ -54,7 +54,7 @@ foreach ($iterator as $fileInfo) {
     $aspectRatio = $width / $height;
     $targetAspectRatio = $targetWidth / $targetHeight;
 
-    $left = $response['hair']['left'] - 32;
+    $left = $response['lantern']['left'] - 300;
     $right = $response['lantern']['right'] + 32;
 
     $top = $response['lantern']['top'] - 32;
