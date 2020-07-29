@@ -1,3 +1,5 @@
 *.iml
 .idea/*
 uploads*/*
+curated/*
+cropped/*

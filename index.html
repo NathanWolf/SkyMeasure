@@ -5,12 +5,12 @@
     <link rel="shortcut icon" href="image/favicon.png" type="image/png" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/sky.css?v=12">
+    <link rel="stylesheet" href="css/sky.css?v=13">
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>
-    <script src="js/sky.js?v=8"></script>
+    <script src="js/sky.js?v=9"></script>
 
 </head>
 <body>
@@ -93,6 +93,9 @@
         <div id="tinyScreenshot" style="display:none">
             <img alt="Tiny Screenshot" src="image/tiny.png?v=1"/>
         </div>
+        <div id="slideshow" style="display:none">
+            <img alt="Slideshow" id="slideshowImage" src="image/blank.png"/>
+        </div>
         <div id="lantern"></div>
         <div id="sliderContainer">
             <div id="slider"></div>
@@ -106,6 +109,7 @@
             <button type="button" id="autoAlignButton" class="panelLabel">Auto-Measure Me!</button><br/>
             <br/>
             <button type="button" id="statsButton" class="panelLabel">Show Me Some Stats!</button><br/>
+            <input type="checkbox" id="showSlideshow"><label class="panelLabel" for="showSlideshow">Show Me <span class="emphasis">Everyone</span></label><br/>
             <br/>
             <input type="checkbox" id="showHuge"><label class="panelLabel" for="showHuge">Huge Spell</label><br/>
             <input type="checkbox" id="showGrow"><label class="panelLabel" for="showGrow">Grow Spell</label><br/>

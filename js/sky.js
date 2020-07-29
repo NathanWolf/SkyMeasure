@@ -15,8 +15,10 @@ function initialize() {
     $('#showShrink').button().on('click', toggleShrink);
     $('#showOfficial').button().on('click', toggleOfficial);
     $('#showScreenshot').button().on('click', toggleScreenshot);
+    $('#showSlideshow').button().on('click', toggleSlideshow);
     $('#statsButton').button().on('click', showStats);
     $('#autoAlignButton').button().on('click', autoAlignImage);
+    $('#slideshowImage').load(slideshowImageReady);
 
     $("#slider").slider({
         orientation: "vertical",
@@ -313,6 +315,66 @@ function toggleOfficial() {
 
 function toggleScreenshot() {
     toggle($('#showScreenshot'), $('#screenshot'));
+}
+
+function toggleSlideshow() {
+    let slideshowButton = $('#showSlideshow');
+    toggle(slideshowButton, $('#slideshow'));
+    if (slideshowButton.is(':checked')) {
+        startSlideshow();
+    } else {
+        stopSlideshow();
+    }
+}
+
+var _slideshowList = [];
+var _slideshowCurrent = 0;
+var _slideshowTimer = null;
+function startSlideshow() {
+    if (_slideshowList.length == 0) {
+        // Temporary work-around for some junk images, I think?
+        _slideshowCurrent = 32;
+
+        $.ajax('list.php', {
+            complete: processSlideshowResult,
+            dataType: 'json'
+        });
+    } else {
+        continueSlideshow();
+    }
+}
+
+function processSlideshowResult(result, resultType) {
+    if (resultType != 'success') {
+        alert('Sorry, something went wrong with the slideshow: ' + resultType);
+        return;
+    }
+    if (result.responseJSON == null) {
+        alert('Sorry, something went wrong with the slideshow (Missing responseJSON)');
+        return;
+    }
+    _slideshowList = result.responseJSON;
+    continueSlideshow();
+}
+
+function continueSlideshow() {
+    stopSlideshow();
+    $('#slideshowImage').prop('src', 'cropped/' + _slideshowList[_slideshowCurrent]);
+    _slideshowCurrent = (_slideshowCurrent + 1) % _slideshowList.length;
+}
+
+function slideshowImageReady() {
+    if ($('#showSlideshow').is(':checked')) {
+        _slideshowTimer = setTimeout(function() {
+            continueSlideshow();
+        }, 100);
+    }
+}
+
+function stopSlideshow() {
+    if (_slideshowTimer != null) {
+        clearTimeout(_slideshowTimer);
+    }
 }
 
 function updateHandles() {

@@ -288,6 +288,20 @@ div#shrinkScreenshot img {
     width: 67%;
 }
 
+div#slideshow {
+    position: absolute;
+    left: 50%;
+    margin-left: -268px;
+    top: 176px;
+    z-index: 12;
+    pointer-events: none;
+}
+
+div#slideshow img {
+    opacity: 100%;
+    width: 63%;
+}
+
 div#officialChart {
     position: absolute;
     left: 50%;
@@ -340,4 +354,9 @@ span#stats_percentile {
 
 #autoAlignButton {
     background-color: #CCCCFF;
+}
+
+.emphasis {
+    font-weight: bold;
+    font-style: italic;
 }
