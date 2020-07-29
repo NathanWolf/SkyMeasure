@@ -56,7 +56,8 @@ def match(image, template, scale):
 	return (maxVal, maxLoc, r)
 
 # loop over the scales of the image
-for scale in np.linspace(0.2, 2.0, 20)[::-1]:
+# Use broad strokes here to find the general range
+for scale in np.linspace(0.1, 3.1, 10)[::-1]:
 	result = match(gray, template, scale)
 	if result is None:
 		break
@@ -70,6 +71,19 @@ if found is None:
 	results = {'success': False, 'message': 'Could not align images'}
 	print(json.dumps(results));
 	sys.exit()
+
+# Now use a tighter loop around the result to narrow in on a scale
+# the first loop steps in 0.3 increments, so we will do 10 steps of 0.03 above and below
+(_, _, broadScale) = found
+for scale in np.linspace(broadScale - 0.15, broadScale + 0.15, 10)[::-1]:
+	result = match(gray, template, scale)
+	if result is None:
+		break
+
+	# if we have found a new maximum correlation value, then update
+	# the bookkeeping variable
+	if result[0] > found[0]:
+		found = result
 
 # unpack the bookkeeping variable and compute the (x, y) coordinates
 # of the bounding box based on the resized ratio
@@ -90,7 +104,9 @@ results['lantern'] = {
 
 # Use the same scale to find the hair
 (template, tH, tW) = loadTemplate('hair.png')
-(correlation, location, _) = match(gray, template, 1 / r)
+(correlation, maxLoc, _) = match(gray, template, 1 / r)
+(startX, startY) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
+(endX, endY) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
 
 results['hair'] = {
 	'left': startX,
