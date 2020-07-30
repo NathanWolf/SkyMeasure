@@ -11,6 +11,10 @@
     <div class="slideContainer">
 <?php
 function processFile() {
+    if (!isset($_FILES["screenshot"])) {
+      echo 'Sorry, your submission was missing a screenshot';
+      return;
+    }
     $targetDir = "uploads/";
     $targetFile = basename($_FILES["screenshot"]["name"]);
     $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
