@@ -41,7 +41,8 @@ foreach ($iterator as $fileInfo) {
     }
 
     echo "Reading $filename\n";
-    $responseCode = execProcess("python align.py --image $sourceFile", $results, $errors);
+    $escaped = escapeshellarg($sourceFile);
+    $responseCode = execProcess("python align.py --image $escaped", $results, $errors);
     if ($responseCode !== 0) {
         echo "   ERROR: $responseCode ($errors)\n";
         continue;
