@@ -35,18 +35,40 @@ sort($files);
 </head>
 <body>
 
-    <div id="filename"></div>
-    <div id="skipBeginning" class="ui-icon ui-icon-arrowthickstop-1-w" title="Go back to the first image"></div>
-    <div id="previous" style="display: none" class="ui-icon ui-icon-arrowthick-1-w" title="Go back one image"></div>
-    <div id="next" class="ui-icon ui-icon-arrowthick-1-e" title="Go forward one image"></div>
-    <div id="skipEnd" class="ui-icon ui-icon-arrowthickstop-1-e" title="Go to the last image"></div>
+    <div id="toolbar">
+        <button id="skipBeginning" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Go back to the first image">
+            <span class="ui-icon ui-icon-arrowthickstop-1-w"></span> First
+        </button>
+        <button id="previous" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Go back one image">
+            <span class="ui-icon ui-icon-arrowthick-1-w"></span> Previous
+        </button>
+        <div class="toolbarElement">
+            <span id="currentIndex"></span>
+            /
+            <span id="maxIndex"></span>
+        </div>
+        <div id="filename" class="toolbarElement"></div>
 
+
+        <button id="next" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Go forward one image">
+            <span class="ui-icon ui-icon-arrowthick-1-e"></span> Next
+        </button>
+        <button id="skipEnd" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Go to the last image">
+            <span class="ui-icon ui-icon-arrowthickstop-1-e"></span> Last
+        </button>
+    </div>
     <div id="screenshotContainer">
         <img id="screenshot" alt="Screenshot" src="image/blank.png"/>
     </div>
 
-    <div id="deleteButton" class="ui-icon ui-icon-trash" title="Delete this screenshot"></div>
+    <div id="bottomToolbar">
+        <button id="deleteButton" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Delete this screenshot">
+            <span class="ui-icon ui-icon-trash"></span> Delete
+        </button>
+    </div>
 
-    <a href="" target="_new" id="originalLink">Show original</a>
+    <div id="linkToolbar">
+        <a href="" target="_new" id="originalLink">Show original</a>
+    </div>
 </body>
 </html>

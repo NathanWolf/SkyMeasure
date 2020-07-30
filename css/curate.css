@@ -5,18 +5,6 @@ body {
     font-family: 'Questrial', sans-serif;
 }
 
-div#filename {
-    font-size: 24px;
-    text-align: center;
-    color: rgba(255,255,255,0.8);
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    margin-left: -320px;
-    width: 640px;
-    overflow: hidden;
-}
-
 div#screenshotContainer {
     position: absolute;
     left: 50%;
@@ -30,70 +18,46 @@ div#screenshotContainer img {
     height: 1024px;
 }
 
-div#skipBeginning {
-    margin-left: -380px;
-    margin-top: -10px;
-    border-radius: 50%;
-    border: 16px solid white;
-    background-color: rgba(255,255,255,0.9);
-    left: 50%;
-    cursor: pointer;
+div#toolbar {
     position: absolute;
     top: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
-div#previous {
-    margin-left: -320px;
-    margin-top: -10px;
-    border-radius: 50%;
-    border: 16px solid white;
-    background-color: rgba(255,255,255,0.9);
-    left: 50%;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
+div.toolbarElement {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline-block;
 }
 
-div#next {
-    margin-left: 320px;
-    margin-top: -10px;
-    border-radius: 50%;
-    border: 16px solid white;
-    background-color: rgba(255,255,255,0.9);
-    left: 50%;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
+div#filename {
+    font-size: 24px;
+    text-align: center;
+    color: rgba(255,255,255,0.8);
+    width: 640px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-div#skipEnd {
-    margin-left: 380px;
-    margin-top: -10px;
-    border-radius: 50%;
-    border: 16px solid white;
-    background-color: rgba(255,255,255,0.9);
-    left: 50%;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-}
-
-div#deleteButton {
-    margin-left: -16px;
-    margin-top: -10px;
-    border-radius: 50%;
-    border: 16px solid white;
-    background-color: rgba(255,255,255,0.9);
-    left: 50%;
-    cursor: pointer;
+div#bottomToolbar {
     position: absolute;
     top: 1130px;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
+div#linkToolbar {
+    position: absolute;
+    top: 1200px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
 
 a#originalLink {
     color: white;
-    position: absolute;
-    top: 1200px;
-    left: 50%;
 }
