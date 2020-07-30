@@ -2,6 +2,8 @@
 function initialize() {
     $('#next').on('click', nextImage);
     $('#previous').on('click', previousImage);
+    $('#skipEnd').on('click', skipEnd);
+    $('#skipBeginning').on('click', skipBeginning);
     $('#deleteButton').on('click', deleteImage);
     updateImage();
 }
@@ -18,10 +20,13 @@ function nextImage() {
     _currentScreenshot++;
     if (_currentScreenshot == _screenshots.length - 1) {
         $('#next').hide();
+        $('#skipEnd').hide();
     } else {
         $('#next').show();
+        $('#skipEnd').show();
     }
     $('#previous').show();
+    $('#skipBeginning').show();
     updateImage();
 }
 
@@ -29,10 +34,31 @@ function previousImage() {
     _currentScreenshot--;
     if (_currentScreenshot == 0) {
         $('#previous').hide();
+        $('#skipBeginning').hide();
     } else {
         $('#previous').show();
+        $('#skipBeginning').show();
     }
     $('#next').show();
+    $('#skipEnd').show();
+    updateImage();
+}
+
+function skipEnd() {
+    _currentScreenshot = _screenshots.length - 1;
+    $('#next').hide();
+    $('#skipEnd').hide();
+    $('#previous').show();
+    $('#skipBeginning').show();
+    updateImage();
+}
+
+function skipBeginning() {
+    _currentScreenshot = 0;
+    $('#previous').hide();
+    $('#skipBeginning').hide();
+    $('#next').show();
+    $('#skipEnd').show();
     updateImage();
 }
 

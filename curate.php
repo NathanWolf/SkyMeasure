@@ -19,13 +19,13 @@ sort($files);
     <link rel="shortcut icon" href="image/favicon.png" type="image/png" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/curate.css?v=1">
+    <link rel="stylesheet" href="css/curate.css?v=2">
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>
 
-    <script src="js/curate.js?v=1"></script>
+    <script src="js/curate.js?v=2"></script>
 
     <script type="text/javascript">
         var _screenshots = <?= json_encode($files) ?>;
@@ -36,8 +36,10 @@ sort($files);
 <body>
 
     <div id="filename"></div>
-    <div id="previous" style="display: none" class="ui-icon ui-icon-arrowthick-1-w" title="Go back one step"></div>
-    <div id="next" class="ui-icon ui-icon-arrowthick-1-e" title="Go forward one step"></div>
+    <div id="skipBeginning" class="ui-icon ui-icon-arrowthickstop-1-w" title="Go back to the first image"></div>
+    <div id="previous" style="display: none" class="ui-icon ui-icon-arrowthick-1-w" title="Go back one image"></div>
+    <div id="next" class="ui-icon ui-icon-arrowthick-1-e" title="Go forward one image"></div>
+    <div id="skipEnd" class="ui-icon ui-icon-arrowthickstop-1-e" title="Go to the last image"></div>
 
     <div id="screenshotContainer">
         <img id="screenshot" alt="Screenshot" src="image/blank.png"/>
