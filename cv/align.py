@@ -60,7 +60,7 @@ def process(image, lanternTemplate, hairTemplate):
 	(tH, tW) = lanternTemplate.shape[:2]
 	# loop over the scales of the image
 	# Use broad strokes here to find the general range
-	for scale in np.linspace(0.1, 3.1, 30)[::-1]:
+	for scale in np.linspace(0.1, 2.1, 20)[::-1]:
 		result = match(image, lanternTemplate, scale)
 		if result is None:
 			break
@@ -125,8 +125,9 @@ results = process(gray, lanternTemplate, hairTemplate)
 
 # If we found a lantern to the left of the hair, try again!
 if (results['success'] and results['hair']['left'] > results['lantern']['right']):
+	original = results
 	cv2.rectangle(gray, (0, 0), (max(results['hair']['left'] - 32, 0), image.shape[0]), (0, 0 ,0), -1)
 	results = process(gray, lanternTemplate, hairTemplate)
-	results['retried'] = True
+	results['original'] = original
 
 print(json.dumps(results))
