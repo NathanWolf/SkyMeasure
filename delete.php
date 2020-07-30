@@ -22,7 +22,11 @@ if (!file_exists($originalFile)) {
     die(json_encode(array('success' => false, 'message' => 'Could not find file: ' . $originalFile)));
 }
 
-rename($originalFile, $movedFile);
-unlink($croppedFile);
+if (!rename($originalFile, $movedFile)) {
+    die(json_encode(array('success' => false, 'message' => 'Could not rename file: ' . $originalFile)));
+}
+if (!unlink($croppedFile)) {
+    die(json_encode(array('success' => false, 'message' => 'Could not delete file: ' . $croppedFile)));
+}
 
 die(json_encode(array('success' => true, 'message' => 'Deleted: ' . $originalFile . ' and ' . $croppedFile)));
