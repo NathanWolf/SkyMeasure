@@ -1,5 +1,11 @@
 <?php
 
+// Don't let external people delete files...
+$client = $_SERVER['REMOTE_ADDR'];
+if (strpos($client, '192.168.1') !== 0) {
+    die(json_encode(array('success' => false, 'message' => 'Sorry, internet randos are not allowed to delete files!')));
+}
+
 if (!isset($_REQUEST['filename'])) {
     die(json_encode(array('success' => false, 'message' => 'Missing filename parameter')));
 }
