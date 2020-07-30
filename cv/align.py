@@ -25,17 +25,16 @@ def loadTemplate(filename):
 	template = cv2.imread(os.path.join(__location__, filename))
 	template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
 	template = cv2.Canny(template, 50, 200)
-	(tH, tW) = template.shape[:2]
-	return (template, tH, tW)
+	return template
 
-(template, tH, tW) = loadTemplate('lantern.png')
-imagePath = args["image"];
+lanternTemplate = loadTemplate('lantern.png')
+hairTemplate = loadTemplate('hair.png')
+imagePath = args["image"]
 
 # load the image, convert it to grayscale, and initialize the
 # bookkeeping variable to keep track of the matched region
 image = cv2.imread(imagePath)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-found = None
 
 def match(image, template, scale):
 	(tH, tW) = template.shape[:2]
@@ -55,66 +54,78 @@ def match(image, template, scale):
 
 	return (maxVal, maxLoc, r)
 
-# loop over the scales of the image
-# Use broad strokes here to find the general range
-for scale in np.linspace(0.1, 3.1, 30)[::-1]:
-	result = match(gray, template, scale)
-	if result is None:
-		break
+def process(image, lanternTemplate, hairTemplate):
+	found = None
 
-	# if we have found a new maximum correlation value, then update
-	# the bookkeeping variable
-	if found is None or result[0] > found[0]:
-		found = result
+	(tH, tW) = lanternTemplate.shape[:2]
+	# loop over the scales of the image
+	# Use broad strokes here to find the general range
+	for scale in np.linspace(0.1, 3.1, 30)[::-1]:
+		result = match(image, lanternTemplate, scale)
+		if result is None:
+			break
 
-if found is None:
-	results = {'success': False, 'message': 'Could not align images'}
-	print(json.dumps(results));
-	sys.exit()
+		# if we have found a new maximum correlation value, then update
+		# the bookkeeping variable
+		if found is None or result[0] > found[0]:
+			found = result
 
-# Now use a tighter loop around the result to narrow in on a scale
-# the first loop steps in 0.1 increments, so we will do 10 steps of 0.01 above and below
-(_, _, broadScale) = found
-for scale in np.linspace(broadScale - 0.01, broadScale + 0.01, 10)[::-1]:
-	result = match(gray, template, scale)
-	if result is None:
-		break
+	if found is None:
+		results = {'success': False, 'message': 'Could not align images'}
+		print(json.dumps(results));
+		sys.exit()
 
-	# if we have found a new maximum correlation value, then update
-	# the bookkeeping variable
-	if result[0] > found[0]:
-		found = result
+	# Now use a tighter loop around the result to narrow in on a scale
+	# the first loop steps in 0.1 increments, so we will do 10 steps of 0.01 above and below
+	(_, _, broadScale) = found
+	for scale in np.linspace(broadScale - 0.01, broadScale + 0.01, 10)[::-1]:
+		result = match(image, lanternTemplate, scale)
+		if result is None:
+			break
 
-# unpack the bookkeeping variable and compute the (x, y) coordinates
-# of the bounding box based on the resized ratio
-(correlation, maxLoc, r) = found
-(startX, startY) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
-(endX, endY) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
+		# if we have found a new maximum correlation value, then update
+		# the bookkeeping variable
+		if result[0] > found[0]:
+			found = result
 
-# Build results
-results = {'success': True}
-results['lantern'] = {
-	'left': startX,
-	'top': startY,
-	'right': endX,
-	'bottom': endY,
-	'scale': r,
-	'correlation': correlation
-}
+	# unpack the bookkeeping variable and compute the (x, y) coordinates
+	# of the bounding box based on the resized ratio
+	(correlation, maxLoc, r) = found
+	(startX, startY) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
+	(endX, endY) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
 
-# Use the same scale to find the hair
-(template, tH, tW) = loadTemplate('hair.png')
-(correlation, maxLoc, _) = match(gray, template, 1 / r)
-(startX, startY) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
-(endX, endY) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
+	# Build results
+	results = {'success': True}
+	results['lantern'] = {
+		'left': startX,
+		'top': startY,
+		'right': endX,
+		'bottom': endY,
+		'scale': r,
+		'correlation': correlation
+	}
 
-results['hair'] = {
-	'left': startX,
-	'top': startY,
-	'right': endX,
-	'bottom': endY,
-	'scale': r,
-	'correlation': correlation
-}
+	# Use the same scale to find the hair
+	(tH, tW) = hairTemplate.shape[:2]
+	(correlation, maxLoc, _) = match(image, hairTemplate, 1 / r)
+	(startX, startY) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
+	(endX, endY) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
+
+	results['hair'] = {
+		'left': startX,
+		'top': startY,
+		'right': endX,
+		'bottom': endY,
+		'scale': r,
+		'correlation': correlation
+	}
+	return results
+
+results = process(gray, lanternTemplate, hairTemplate)
+
+# If we found a lantern to the left of the hair, try again!
+if (results['success'] and results['hair']['left'] > results['lantern']['right']):
+	cv2.rectangle(gray, (0, 0), (max(results['hair']['left'] - 32, 0), image.shape[0]), (0, 0 ,0), -1)
+	results = process(gray, lanternTemplate, hairTemplate)
 
 print(json.dumps(results))
