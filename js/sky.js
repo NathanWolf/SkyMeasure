@@ -318,9 +318,6 @@ var _slideshowCurrent = 0;
 var _slideshowTimer = null;
 function startSlideshow() {
     if (_slideshowList.length == 0) {
-        // Temporary work-around for some junk images, I think?
-        _slideshowCurrent = 32;
-
         $.ajax('list.php', {
             complete: processSlideshowResult,
             dataType: 'json'

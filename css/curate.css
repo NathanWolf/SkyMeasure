@@ -1,0 +1,78 @@
+body {
+    background: black;
+    font-size: 14px;
+    color: #ffffff;
+    font-family: 'Questrial', sans-serif;
+    user-select: none;
+}
+
+div#filename {
+    font-size: 24px;
+    text-align: center;
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    margin-left: -320px;
+    width: 640px;
+    overflow: hidden;
+}
+
+div#screenshotContainer {
+    position: absolute;
+    left: 50%;
+    margin-left: -320px;
+    top: 80px;
+    z-index: 7;
+    pointer-events: none;
+}
+
+div#screenshotContainer img {
+    width: 640px;
+    height: 1024px;
+}
+
+div#previous {
+    margin-left: -320px;
+    margin-top: -10px;
+    border-radius: 50%;
+    border: 16px solid white;
+    background-color: rgba(255,255,255,0.9);
+    left: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+}
+
+div#next {
+    margin-left: 320px;
+    margin-top: -10px;
+    border-radius: 50%;
+    border: 16px solid white;
+    background-color: rgba(255,255,255,0.9);
+    left: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+}
+
+div#deleteButton {
+    margin-left: -16px;
+    margin-top: -10px;
+    border-radius: 50%;
+    border: 16px solid white;
+    background-color: rgba(255,255,255,0.9);
+    left: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 1130px;
+}
+
+
+a#originalLink {
+    color: white;
+    position: absolute;
+    top: 1200px;
+    left: 50%;
+}
