@@ -127,5 +127,6 @@ results = process(gray, lanternTemplate, hairTemplate)
 if (results['success'] and results['hair']['left'] > results['lantern']['right']):
 	cv2.rectangle(gray, (0, 0), (max(results['hair']['left'] - 32, 0), image.shape[0]), (0, 0 ,0), -1)
 	results = process(gray, lanternTemplate, hairTemplate)
+	results['retried'] = True
 
 print(json.dumps(results))
