@@ -20,6 +20,15 @@ function initialize() {
     $('#autoAlignButton').button().on('click', autoAlignImage);
     $('#slideshowImage').load(slideshowImageReady);
 
+    $('#userImage').resizable({
+        aspectRatio: true,
+        handles: 'n, e, s, w, ne, se, sw, nw',
+        resize: updateHandles
+    });
+    $('#screenshot').draggable({
+        drag: updateHandles
+    });
+
     $("#slider").slider({
         orientation: "vertical",
         range: "min",
@@ -140,17 +149,11 @@ function readURL() {
 }
 
 function screenshotReady() {
-    $('#userImage').resizable({
-        aspectRatio: true,
-        handles: 'n, e, s, w, ne, se, sw, nw',
-        resize: updateHandles
-    });
-    $('#screenshot').draggable({
-        drag: updateHandles
-    });
     $('#screenshot').css('left', $('#lantern').position().left - 300);
 
-    resize($('#userImage'), 600, 600 / $('#userImage').width() * $('#userImage').height());
+    let width = $('#userImage').get(0).naturalWidth;
+    let height = $('#userImage').get(0).naturalHeight;
+    resize($('#userImage'), 600, 600 / width * height);
     sliderMoved();
     updateHandles();
     flashAlignButtonButton();
