@@ -1,7 +1,8 @@
 <?php
 
+$folder = 'cropped';
 $files = array();
-$iterator = new DirectoryIterator('cropped');
+$iterator = new DirectoryIterator($folder);
 foreach ($iterator as $fileInfo) {
     if ($fileInfo->isDot()) continue;
     $filename = $fileInfo->getFilename();
@@ -29,6 +30,7 @@ sort($files);
     <script type="text/javascript">
         var _screenshots = <?= json_encode($files) ?>;
         var _currentScreenshot = 0;
+        var _folder = '<?= $folder ?>';
     </script>
 </head>
 <body>

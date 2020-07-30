@@ -8,7 +8,7 @@ function initialize() {
 
 function updateImage() {
     let filename = _screenshots[_currentScreenshot];
-    $('#screenshot').prop('src', 'cropped/' + filename);
+    $('#screenshot').prop('src', _folder + '/' + filename);
     $('#filename').text(filename);
     let originalFilename = filename.substr(6);
     $('#originalLink').prop('href', 'curated/' + originalFilename);
@@ -41,7 +41,7 @@ function deleteImage() {
 
     $.ajax('delete.php', {
         complete: processDeleteResult,
-        data: {'filename': filename},
+        data: {'filename': filename, 'folder': _folder},
         dataType: 'json'
     });
 }

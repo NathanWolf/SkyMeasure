@@ -3,14 +3,12 @@ body {
     font-size: 14px;
     color: #ffffff;
     font-family: 'Questrial', sans-serif;
-    user-select: none;
 }
 
 div#filename {
     font-size: 24px;
     text-align: center;
     color: rgba(255,255,255,0.8);
-    cursor: pointer;
     position: absolute;
     top: 20px;
     left: 50%;
