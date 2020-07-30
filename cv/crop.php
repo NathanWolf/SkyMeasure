@@ -60,12 +60,15 @@ foreach ($iterator as $fileInfo) {
     $height = imagesy($image);
     $aspectRatio = $width / $height;
     $targetAspectRatio = $targetWidth / $targetHeight;
+    $lanternWidth = $response['lantern']['right']  - $response['lantern']['left'];
+    $padding = $lanternWidth / 10;
 
-    $left = $response['lantern']['left'] - 300;
-    $right = $response['lantern']['right'] + 32;
 
-    $top = $response['lantern']['top'] - 32;
-    $bottom = $response['lantern']['bottom'] + 64;
+    $left = $response['lantern']['left'] - ($lanternWidth + $padding);
+    $right = $response['lantern']['right'] + $padding;
+
+    $top = $response['lantern']['top'] - $padding;
+    $bottom = $response['lantern']['bottom'] - ($padding * 2);
 
     $lanternSize = $response['lantern']['bottom'] - $response['lantern']['top'];
     $hairRatio = ($response['hair']['top'] - $response['lantern']['top']) / $lanternSize;
