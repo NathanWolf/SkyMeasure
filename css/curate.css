@@ -20,7 +20,15 @@ div#screenshotContainer img {
 
 div#toolbar {
     position: absolute;
-    top: 20px;
+    top: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+div#modTime {
+    position: absolute;
+    top: 40px;
     left: 0;
     right: 0;
     text-align: center;

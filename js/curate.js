@@ -14,6 +14,7 @@ function updateImage() {
     $('#filename').text(filename);
     let originalFilename = filename.substr(6);
     $('#originalLink').prop('href', 'curated/' + originalFilename);
+    $('#modTime').text(new Date(_modTimes[filename] * 1000).toLocaleString());
 
     $('#currentIndex').text(_currentScreenshot + 1);
     $('#maxIndex').text(_screenshots.length);

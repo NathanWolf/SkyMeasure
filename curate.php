@@ -1,15 +1,32 @@
 <?php
 
 $folder = 'cropped';
-$files = array();
+$fileDescriptors = array();
 $iterator = new DirectoryIterator($folder);
 foreach ($iterator as $fileInfo) {
     if ($fileInfo->isDot()) continue;
-    $filename = $fileInfo->getFilename();
-    array_push($files, $filename);
+    array_push($fileDescriptors, array(
+        'modTime' => $fileInfo->getMTime(),
+        'filename' => $fileInfo->getFilename()
+    ));
 }
 
-sort($files);
+function compareMTime($a, $b) {
+    return $b['modTime'] - $a['modTime'];
+}
+
+usort($fileDescriptors, 'compareMTime');
+
+$files = array();
+$modTimes = array();
+function indexFile($file) {
+    global $modTimes;
+    global $files;
+
+    $modTimes[$file['filename']] = $file['modTime'];
+    array_push($files, $file['filename']);
+}
+array_map('indexFile', $fileDescriptors);
 
 ?>
 <html lang="en">
@@ -19,16 +36,17 @@ sort($files);
     <link rel="shortcut icon" href="image/favicon.png" type="image/png" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/curate.css?v=2">
+    <link rel="stylesheet" href="css/curate.css?v=3">
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>
 
-    <script src="js/curate.js?v=2"></script>
+    <script src="js/curate.js?v=3"></script>
 
     <script type="text/javascript">
         var _screenshots = <?= json_encode($files) ?>;
+        var _modTimes = <?= json_encode($modTimes) ?>;
         var _currentScreenshot = 0;
         var _folder = '<?= $folder ?>';
     </script>
@@ -56,6 +74,9 @@ sort($files);
         <button id="skipEnd" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Go to the last image">
             <span class="ui-icon ui-icon-arrowthickstop-1-e"></span> Last
         </button>
+    </div>
+    <div id="modTime">
+
     </div>
     <div id="screenshotContainer">
         <img id="screenshot" alt="Screenshot" src="image/blank.png"/>
