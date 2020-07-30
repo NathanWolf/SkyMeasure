@@ -33,6 +33,13 @@ foreach ($iterator as $fileInfo) {
     $pathname = $fileInfo->getPath();
     $sourceFile = $pathname . '/' . $filename;
 
+    $wildcard = $targetFolder . '*_' . $filename;
+    $list = glob($wildcard);
+    if ($list) {
+        echo "Skipping $filename, target already exists\n";
+        continue;
+    }
+
     echo "Reading $filename\n";
     $responseCode = execProcess("python align.py --image $sourceFile", $results, $errors);
     if ($responseCode !== 0) {
