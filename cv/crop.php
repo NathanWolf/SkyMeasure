@@ -5,11 +5,12 @@ if (PHP_SAPI !== 'cli') {
 }
 
 if (count($argv) < 3) {
-    die("Usage: crop.php <source folder> <target folder>\n");
+    die("Usage: crop.php <source folder> <target folder> [curate folder]\n");
 }
 
 $sourceFolder = $argv[1];
 $targetFolder = $argv[2];
+$curateFolder = count($argv) > 3 ? $argv[3] : '';
 
 function execProcess($cmd, &$stdout=null, &$stderr=null) {
     $proc = proc_open($cmd,[
@@ -94,4 +95,10 @@ foreach ($iterator as $fileInfo) {
 
     imagejpeg($cropped, $targetFile, 80);
     echo "  Wrote $targetFile\n";
+
+    if ($curateFolder) {
+        $moveFile = $curateFolder . '/' . $filename;
+        rename($sourceFile, $moveFile);
+        echo "  Moved $sourceFile to $moveFile\n";
+    }
 }
