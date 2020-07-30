@@ -480,12 +480,24 @@ function processAlignResult(result, resultType) {
 
     const heightRangeInPixels = $('#sliderContainer').height();
     const sliderTop = $('#sliderContainer').position().top;
-    const cowlickHeight = 23;
+    let cowlickHeight = 23;
     const alignedHair = result.responseJSON.hair;
-    let hairTop = container.position().top + alignedHair.top * scale  + cowlickHeight;
+    let hairTop = container.position().top + alignedHair.top * scale + cowlickHeight;
     let heightValue = 4000 - ((hairTop - sliderTop) / heightRangeInPixels * 4000);
     heightValue = Math.max(heightValue, 0);
     heightValue = Math.min(heightValue, 4000);
+
+    // Remove the cowlick now that we know about how big it should be
+    const heightScale = heightValue / 4000;
+
+    // Note that this is intentionally inverted (taller person = smaller cowlick), not sure why that is but seems
+    // true experimentally
+    cowlickHeight = 28 - 8 * heightScale;
+    hairTop = container.position().top + alignedHair.top * scale + cowlickHeight;
+    heightValue = 4000 - ((hairTop - sliderTop) / heightRangeInPixels * 4000);
+    heightValue = Math.max(heightValue, 0);
+    heightValue = Math.min(heightValue, 4000);
+
     $('#slider').slider('value', heightValue);
 
     sliderMoved();

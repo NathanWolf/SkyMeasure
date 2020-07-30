@@ -60,7 +60,7 @@ def process(image, lanternTemplate, hairTemplate):
 	(tH, tW) = lanternTemplate.shape[:2]
 	# loop over the scales of the image
 	# Use broad strokes here to find the general range
-	for scale in np.linspace(0.1, 2.1, 20)[::-1]:
+	for scale in np.linspace(0.1, 2.1, 50)[::-1]:
 		result = match(image, lanternTemplate, scale)
 		if result is None:
 			break
@@ -76,9 +76,9 @@ def process(image, lanternTemplate, hairTemplate):
 		sys.exit()
 
 	# Now use a tighter loop around the result to narrow in on a scale
-	# the first loop steps in 0.1 increments, so we will do 10 steps of 0.01 above and below
+	# the first loop steps in 0.004 increments, so we will do 10 steps of 0.01 above and below
 	(_, _, broadScale) = found
-	for scale in np.linspace(broadScale - 0.01, broadScale + 0.01, 10)[::-1]:
+	for scale in np.linspace(broadScale - 0.002, broadScale + 0.002, 10)[::-1]:
 		result = match(image, lanternTemplate, scale)
 		if result is None:
 			break
