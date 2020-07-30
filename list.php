@@ -5,7 +5,7 @@ $iterator = new DirectoryIterator('cropped');
 foreach ($iterator as $fileInfo) {
     if ($fileInfo->isDot()) continue;
     $filename = $fileInfo->getFilename();
-    array_push($files, $filename);
+    array_push($files, 'cropped/' . $filename);
 }
 
 sort($files);

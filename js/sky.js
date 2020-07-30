@@ -342,7 +342,7 @@ function processSlideshowResult(result, resultType) {
 
 function continueSlideshow() {
     stopSlideshow();
-    $('#slideshowImage').prop('src', 'cropped/' + _slideshowList[_slideshowCurrent]);
+    $('#slideshowImage').prop('src', _slideshowList[_slideshowCurrent]);
     _slideshowCurrent = (_slideshowCurrent + 1) % _slideshowList.length;
 }
 
