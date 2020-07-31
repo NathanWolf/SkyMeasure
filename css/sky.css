@@ -360,3 +360,11 @@ span#stats_percentile {
     font-weight: bold;
     font-style: italic;
 }
+
+div#secretButton {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 16px;
+    height: 16px;
+}

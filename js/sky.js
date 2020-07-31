@@ -20,6 +20,7 @@ function initialize() {
     $('#autoAlignButton').button().button('disable').on('click', autoAlignImage0);
     $('#autoAlignButton1').button().button('disable').on('click', autoAlignImage1);
     $('#slideshowImage').load(slideshowImageReady);
+    $('#secretButton').on('click', enableDebug);
 
     $('#userImage').resizable({
         aspectRatio: true,
