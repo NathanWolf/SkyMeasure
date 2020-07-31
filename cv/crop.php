@@ -65,6 +65,12 @@ foreach ($iterator as $fileInfo) {
     $lanternWidth = $response['lantern']['right']  - $response['lantern']['left'];
     $padding = $lanternWidth / 10;
 
+/*
+    For aligning the kids and not the lantern:
+
+    $left = $response['hair']['left'] - $lanternWidth;
+    $right = $response['hair']['right'] + $lanternWidth;
+ */
 
     $left = $response['lantern']['left'] - ($lanternWidth + $padding);
     $right = $response['lantern']['right'] + $padding;
