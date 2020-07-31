@@ -4,6 +4,7 @@ function initialize() {
     $('#skipBeginning').button({showLabel: false}).on('click', skipBeginning);
     $('#previous').button({showLabel: false}).on('click', previousImage);
     $('#skipEnd').button({showLabel: false}).on('click', skipEnd);
+    $('#sort').button({showLabel: false}).on('click', sort);
     $('#deleteButton').button({showLabel: false}).on('click', deleteImage);
     skipBeginning();
 }
@@ -67,6 +68,12 @@ function skipBeginning() {
     $('#next').button('enable');
     $('#skipEnd').button('enable');
     updateImage();
+}
+
+function sort() {
+    $('#sort').button('disable');
+    _screenshots.sort();
+    skipBeginning();
 }
 
 function deleteImage() {

@@ -60,6 +60,9 @@ array_map('indexFile', $fileDescriptors);
         <button id="previous" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Go back one image">
             <span class="ui-icon ui-icon-arrowthick-1-w"></span> Previous
         </button>
+        <button id="sort" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Go back one image">
+            <span class="ui-icon ui-icon-shuffle"></span> Sort
+        </button>
         <div class="toolbarElement">
             <span id="currentIndex"></span>
             /
