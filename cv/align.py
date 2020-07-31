@@ -17,6 +17,7 @@ import os
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True, help="Path to the image where template will be matched")
+ap.add_argument("--quality", type=int, help="Adjust quality of matching", nargs='?', default=0, const=0)
 args = vars(ap.parse_args())
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
@@ -30,6 +31,27 @@ def loadTemplate(filename):
 lanternTemplate = loadTemplate('lantern.png')
 hairTemplate = loadTemplate('hair.png')
 imagePath = args["image"]
+quality = args["quality"]
+
+broadIterations = 20
+broadStart = 0.2
+broadEnd = 2.2
+
+fineIterations = 10
+
+if quality == 1:
+	broadIterations = 60
+	broadStart = 0.1
+	broadEnd = 2.1
+	fineIterations = 20
+elif quality != 0:
+	results = {'success': False, 'message': 'Invalid quality specified'}
+	print(json.dumps(results));
+	sys.exit()
+
+broadStep = (broadEnd - broadStart) / broadIterations
+fineStartOffset = -broadStep / 2
+fineEndOffset = broadStep / 2
 
 # load the image, convert it to grayscale, and initialize the
 # bookkeeping variable to keep track of the matched region
@@ -60,7 +82,7 @@ def process(image, lanternTemplate, hairTemplate):
 	(tH, tW) = lanternTemplate.shape[:2]
 	# loop over the scales of the image
 	# Use broad strokes here to find the general range
-	for scale in np.linspace(0.1, 2.1, 50)[::-1]:
+	for scale in np.linspace(broadStart, broadEnd, broadIterations)[::-1]:
 		result = match(image, lanternTemplate, scale)
 		if result is None:
 			break
@@ -78,7 +100,7 @@ def process(image, lanternTemplate, hairTemplate):
 	# Now use a tighter loop around the result to narrow in on a scale
 	# the first loop steps in 0.004 increments, so we will do 10 steps of 0.01 above and below
 	(_, _, broadScale) = found
-	for scale in np.linspace(broadScale - 0.002, broadScale + 0.002, 10)[::-1]:
+	for scale in np.linspace(broadScale - fineStartOffset, broadScale + fineEndOffset, fineIterations)[::-1]:
 		result = match(image, lanternTemplate, scale)
 		if result is None:
 			break

@@ -19,8 +19,9 @@ function execProcess($cmd, &$stdout=null, &$stderr=null) {
     return proc_close($proc);
 }
 
+$quality = isset($_REQUEST['quality']) ? $_REQUEST['quality'] : 0;
 $escaped = escapeshellarg($filename);
-$responseCode = execProcess("python cv/align.py --image $escaped", $results, $errors);
+$responseCode = execProcess("python cv/align.py --quality $quality --image $escaped", $results, $errors);
 
 if ($responseCode !== 0) {
     die(json_encode(array('success' => false, 'message' => 'Matching script failure (' . $responseCode . '): ' . $errors)));

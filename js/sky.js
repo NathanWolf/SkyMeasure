@@ -17,7 +17,8 @@ function initialize() {
     $('#showScreenshot').button().on('click', toggleScreenshot);
     $('#showSlideshow').button().on('click', toggleSlideshow);
     $('#statsButton').button().on('click', showStats);
-    $('#autoAlignButton').button().on('click', autoAlignImage);
+    $('#autoAlignButton').button().button('disable').on('click', autoAlignImage0);
+    $('#autoAlignButton1').button().button('disable').on('click', autoAlignImage1);
     $('#slideshowImage').load(slideshowImageReady);
 
     $('#userImage').resizable({
@@ -158,6 +159,11 @@ function screenshotReady() {
     updateHandles();
     flashAlignButtonButton();
     $('#autoAlignButton').button('enable');
+    if (!_debugMode) {
+        $('#autoAlignButton1').button('disable');
+    } else {
+        $('#autoAlignButton1').button('enable');
+    }
 }
 
 function resize(target, new_width, new_height){
@@ -432,14 +438,27 @@ function stopFlashSubmitButton() {
     unhighlightSubmitButton();
 }
 
-function autoAlignImage() {
+function autoAlignImage0() {
     if (!_debugMode) {
         $('#autoAlignButton').button('disable');
+        $('#autoAlignButton1').button('enable');
     }
+    autoAlignImage(0);
+}
+
+function autoAlignImage1() {
+    if (!_debugMode) {
+        $('#autoAlignButton1').button('disable');
+    }
+    autoAlignImage(1);
+}
+
+function autoAlignImage(quality) {
     $('#loadingScreen').show();
 
     let form = $('#imageForm')[0];
     let formData = new FormData(form);
+    formData.set("quality", quality);
 
     $.ajax('align.php', {
         complete: processAlignResult,
@@ -515,6 +534,7 @@ var _debugMode= false;
 function enableDebug() {
     _debugMode = true;
     $('#autoAlignButton').button('enable');
+    $('#autoAlignButton1').button('enable');
 }
 
 $(document).ready(initialize);
