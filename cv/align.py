@@ -41,8 +41,8 @@ fineIterations = 10
 
 if quality == 1:
 	broadIterations = 60
-	broadStart = 0.1
-	broadEnd = 2.1
+	broadStart = 0.2
+	broadEnd = 2.2
 	fineIterations = 20
 elif quality != 0:
 	results = {'success': False, 'message': 'Invalid quality specified'}
