@@ -494,8 +494,9 @@ function processAlignResult(result, resultType) {
     let container = $('#screenshot');
     let targetWidth = screenshot.get(0).naturalWidth * scale;
 
-    // This is really fudgy, and I'm not sure why yet
-    let targetTop = $('#lantern').position().top - alignedLantern.top * scale - $('#lantern').height() / 4 - 8
+    // This is really fudgy, and I'm not sure why
+    let screenshotTop = $('#screenshotContainer').position().top;
+    let targetTop = $('#lantern').position().top - alignedLantern.top * scale - screenshotTop + 8;
     container.css('left', $('#lantern').position().left - alignedLantern.left * scale - $('#lantern').width() / 2 - 8);
     container.css('top', targetTop);
 
@@ -503,20 +504,17 @@ function processAlignResult(result, resultType) {
 
     const heightRangeInPixels = $('#sliderContainer').height();
     const sliderTop = $('#sliderContainer').position().top;
-    let cowlickHeight = 23;
+    let cowlickHeight = 18;
     const alignedHair = result.responseJSON.hair;
-    let hairTop = container.position().top + alignedHair.top * scale + cowlickHeight;
+    let hairTop = container.offset().top + alignedHair.top * scale + cowlickHeight;
     let heightValue = 4000 - ((hairTop - sliderTop) / heightRangeInPixels * 4000);
     heightValue = Math.max(heightValue, 0);
     heightValue = Math.min(heightValue, 4000);
 
     // Remove the cowlick now that we know about how big it should be
     const heightScale = heightValue / 4000;
-
-    // Note that this is intentionally inverted (taller person = smaller cowlick), not sure why that is but seems
-    // true experimentally
-    cowlickHeight = 28 - 8 * heightScale;
-    hairTop = container.position().top + alignedHair.top * scale + cowlickHeight;
+    cowlickHeight = 16 + 4 * heightScale;
+    hairTop = container.offset().top + alignedHair.top * scale + cowlickHeight;
     heightValue = 4000 - ((hairTop - sliderTop) / heightRangeInPixels * 4000);
     heightValue = Math.max(heightValue, 0);
     heightValue = Math.min(heightValue, 4000);
