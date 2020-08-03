@@ -28,6 +28,9 @@ h2 {
     margin: auto;
     width: 600px;
     margin-top: 16px;
+
+    padding: 8px 16px;
+    height: 38px;
 }
 
 h3 {
@@ -70,8 +73,8 @@ div.overlay {
 }
 
 div#skip {
-    margin-left: 380px;
-    margin-top: -10px;
+    margin-left: 370px;
+    margin-top: 8px;
     border-radius: 50%;
     border: 16px solid white;
     background-color: rgba(255,255,255,0.9);
@@ -82,7 +85,7 @@ div#skip {
 
 div#previous {
     margin-left: -360px;
-    margin-top: -10px;
+    margin-top: 8px;
     border-radius: 50%;
     border: 16px solid white;
     background-color: rgba(255,255,255,0.9);
@@ -92,8 +95,8 @@ div#previous {
 }
 
 div#next {
-    margin-left: 320px;
-    margin-top: -10px;
+    margin-left: 310px;
+    margin-top: 8px;
     border-radius: 50%;
     border: 16px solid white;
     background-color: rgba(255,255,255,0.9);
