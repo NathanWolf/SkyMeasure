@@ -9,6 +9,7 @@ function initialize() {
     $('#showHuge').button().on('click', toggleHuge);
     $('#showTiny').button().on('click', toggleTiny);
     $('#showTallest').button().on('click', toggleTallest);
+    $('#showKnown').button().on('click', toggleKnown);
     $('#showSmallest').button().on('click', toggleSmallest);
     $('#showChild').button().on('click', toggleChild);
     $('#showGrow').button().on('click', toggleGrow);
@@ -275,6 +276,10 @@ function toggle(checkbox, container) {
     } else {
         container.hide();
     }
+}
+
+function toggleKnown() {
+    toggle($('#showKnown'), $('#knownScreenshot'));
 }
 
 function toggleTallest() {
