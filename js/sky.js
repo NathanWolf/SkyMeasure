@@ -59,10 +59,8 @@ function sliderMoved(event, ui) {
     let value = ui ? ui.value : slider.slider('value');
 
     if (value == 0 || value == 4000) {
-        flashSubmitButton();
         $('#statsButton').button('disable');
     } else {
-        stopFlashSubmitButton();
         $('#statsButton').button('enable');
     }
 
@@ -404,44 +402,6 @@ function updateHandles() {
 
     $('.ui-resizable-nw').css('border-left-width', Math.max(minSize, leftDelta));
     $('.ui-resizable-nw').css('border-bottom-width', Math.max(minSize, topDelta));
-}
-
-var _submitFlashTimer = null;
-var _submitIsHighlighted = false;
-function highlightSubmitButton() {
-    $('#uploadButton').css('background-color', 'red')
-    $('#uploadButton').css('color', 'white');
-    _submitIsHighlighted = true;
-}
-
-function unhighlightSubmitButton() {
-    $('#uploadButton').css('background-color', 'white')
-    $('#uploadButton').css('color', 'black');
-    _submitIsHighlighted = false;
-}
-
-function scheduleFlashSubmitButton() {
-    _submitFlashTimer = setTimeout(function() {
-        if (_submitIsHighlighted) {
-            unhighlightSubmitButton();
-        } else {
-            highlightSubmitButton();
-        }
-        scheduleFlashSubmitButton();
-    }, 1000);
-}
-
-function flashSubmitButton() {
-    stopFlashSubmitButton();
-    highlightSubmitButton();
-    scheduleFlashSubmitButton();
-}
-
-function stopFlashSubmitButton() {
-    if (_submitFlashTimer != null) {
-        clearTimeout(_submitFlashTimer);
-    }
-    unhighlightSubmitButton();
 }
 
 function autoAlignImage0() {
