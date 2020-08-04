@@ -140,7 +140,7 @@ div#size {
 }
 
 div#slider {
-    height: 169px;
+    height: 162px;
 }
 
 div#sliderContainer {
@@ -322,15 +322,15 @@ div#officialChart img {
 div#knownScreenshot {
     position: absolute;
     left: 50%;
-    margin-left: -455px;
-    top: 200px;
+    margin-left: -445px;
+    top: 204px;
     z-index: 8;
     pointer-events: none;
 }
 
 div#knownScreenshot img {
     opacity: 80%;
-    width: 75%;
+    width: 73%;
 }
 
 div.tips {
