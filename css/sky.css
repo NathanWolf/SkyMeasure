@@ -140,13 +140,13 @@ div#size {
 }
 
 div#slider {
-    height: 154px;
+    height: 169px;
 }
 
 div#sliderContainer {
     position: absolute;
     left: 50%;
-    top: 322px;
+    top: 320px;
     margin-left: 120px;
     z-index: 100;
 }
