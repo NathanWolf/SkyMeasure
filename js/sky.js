@@ -68,8 +68,18 @@ function sliderMoved(event, ui) {
     $('#sliderLine').css('top', position);
     $('#size').css('top', position);
 
-    value = ((value - 2000) / 1000).toFixed(3);
-    $("#size").text(value);
+    value = ((value - 2000) / 1000);
+    let cm = (value + 2) * 40 / 4 + 80;
+    let inches = cm / 2.54;
+
+    value = value.toFixed(3);
+    let m = (cm / 100).toFixed(2);
+    let feet = Math.floor(inches / 12);
+    inches = Math.floor(inches - (feet * 12));
+    $("#size").empty();
+    $("#size").append($("<div>").text(m + 'm'));
+    $("#size").append($("<div>").text(feet + "'" + inches + '"'));
+    $("#size").append($("<div>").text(value));
 }
 
 var _slides = [];
