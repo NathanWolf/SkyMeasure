@@ -386,3 +386,15 @@ div#secretButton {
     width: 16px;
     height: 16px;
 }
+
+div.imperialScale {
+    color: #AAA;
+}
+
+div.rawScale {
+    color: #888;
+}
+
+div.oldScale {
+    color: #666;
+}

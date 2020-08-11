@@ -72,14 +72,16 @@ function sliderMoved(event, ui) {
     let cm = (value + 2) * 40 / 4 + 80;
     let inches = cm / 2.54;
 
-    value = value.toFixed(3);
     let m = (cm / 100).toFixed(2);
     let feet = Math.floor(inches / 12);
+    let oldValue = Math.floor((1 - ((value + 2) / 4)) * 12 + 1);
     inches = Math.floor(inches - (feet * 12));
+    value = value.toFixed(3);
     $("#size").empty();
-    $("#size").append($("<div>").text(m + 'm'));
-    $("#size").append($("<div>").text(feet + "'" + inches + '"'));
-    $("#size").append($("<div>").text(value));
+    $("#size").append($("<div>").addClass("metricScale").text(m + 'm'));
+    $("#size").append($("<div>").addClass("imperialScale").text(feet + "'" + inches + '"'));
+    $("#size").append($("<div>").addClass("rawScale").text(value));
+    $("#size").append($("<div>").addClass("oldScale").text(oldValue));
 }
 
 var _slides = [];
