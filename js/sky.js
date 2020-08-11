@@ -72,9 +72,14 @@ function sliderMoved(event, ui) {
     let cm = (value + 2) * 40 / 4 + 80;
     let inches = cm / 2.54;
 
+    // Rainbows
+    let scalar = ((value + 2) / 4);
+    let color = hsv2rgb(scalar * 300, 1, 1);
+    $('#sliderLine').css('border-top-color', 'rgb(' + (255 * color[0]) + ',' + (255 * color[1]) + ',' + (255 * color[2]) + ')');
+
     let m = (cm / 100).toFixed(2);
     let feet = Math.floor(inches / 12);
-    let oldValue = Math.floor((1 - ((value + 2) / 4)) * 12 + 1);
+    let oldValue = Math.floor((1 - scalar) * 12 + 1);
     inches = Math.floor(inches - (feet * 12));
     value = value.toFixed(3);
     $("#size").empty();
@@ -511,6 +516,12 @@ function enableDebug() {
     _debugMode = true;
     $('#autoAlignButton').button('enable');
     $('#autoAlignButton1').button('enable');
+}
+
+// https://stackoverflow.com/questions/17242144/javascript-convert-hsb-hsv-color-to-rgb-accurately
+function hsv2rgb(h,s,v) {
+  let f= (n,k=(n+h/60)%6) => v - v*s*Math.max( Math.min(k,4-k,1), 0);
+  return [f(5),f(3),f(1)];
 }
 
 $(document).ready(initialize);
