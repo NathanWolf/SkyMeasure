@@ -9,6 +9,7 @@ body {
     color: #ffffff;
     font-family: 'Questrial', sans-serif;
     user-select: none;
+    overflow: hidden;
 }
 
 h1 {
