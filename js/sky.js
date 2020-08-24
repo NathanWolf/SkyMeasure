@@ -18,8 +18,7 @@ function initialize() {
     $('#showScreenshot').button().on('click', toggleScreenshot);
     $('#showSlideshow').button().on('click', toggleSlideshow);
     $('#statsButton').button().on('click', showStats);
-    $('#autoAlignButton').button().button('disable').on('click', autoAlignImage0);
-    $('#autoAlignButton1').button().button('disable').on('click', autoAlignImage1);
+    $('#autoAlignButton').button().button('disable').on('click', autoAlignImage1);
     $('#slideshowImage').load(slideshowImageReady);
     $('#secretButton').on('click', enableDebug);
 
@@ -174,13 +173,8 @@ function screenshotReady() {
     resize($('#userImage'), 600, 600 / width * height);
     sliderMoved();
     updateHandles();
-    flashAlignButtonButton();
     $('#autoAlignButton').button('enable');
-    if (!_debugMode) {
-        $('#autoAlignButton1').button('disable');
-    } else {
-        $('#autoAlignButton1').button('enable');
-    }
+    autoAlignImage(0, true);
 }
 
 function resize(target, new_width, new_height){
@@ -421,24 +415,18 @@ function updateHandles() {
     $('.ui-resizable-nw').css('border-bottom-width', Math.max(minSize, topDelta));
 }
 
-function autoAlignImage0() {
-    if (!_debugMode) {
-        $('#autoAlignButton').button('disable');
-        $('#autoAlignButton1').button('enable');
-    }
-    autoAlignImage(0);
-}
-
 function autoAlignImage1() {
     if (!_debugMode) {
-        $('#autoAlignButton1').button('disable');
+        $('#autoAlignButton').button('disable');
     }
     autoAlignImage(1);
 }
 
-function autoAlignImage(quality) {
+_showMessages = true;
+function autoAlignImage(quality, showMessages) {
     $('#loadingScreen').show();
 
+    _showMessages = typeof showMessages === 'undefined' ? true : showMessages;
     let form = $('#imageForm')[0];
     let formData = new FormData(form);
     formData.set("quality", quality);
@@ -456,16 +444,22 @@ function autoAlignImage(quality) {
 function processAlignResult(result, resultType) {
     $('#loadingScreen').hide();
     if (resultType != 'success') {
-        alert('Sorry, something went wrong with the auto-align: ' + resultType);
+        if (_showMessages) {
+            alert('Sorry, something went wrong with the auto-align: ' + resultType);
+        }
         return;
     }
     if (result.responseJSON == null) {
-        alert('Sorry, something went wrong with the auto-align (Missing responseJSON)');
+        if (_showMessages) {
+            alert('Sorry, something went wrong with the auto-align (Missing responseJSON)');
+        }
         return;
     }
 
     if (!result.responseJSON.success) {
-        alert('Sorry, something went wrong with the auto-align: ' + result.responseJSON.message);
+        if (_showMessages) {
+            alert('Sorry, something went wrong with the auto-align: ' + result.responseJSON.message);
+        }
         return;
     }
 
@@ -507,15 +501,10 @@ function processAlignResult(result, resultType) {
     updateHandles();
 }
 
-function flashAlignButtonButton() {
-    $('#autoAlignButton').effect("pulsate", { times: 2 }, 2000);
-}
-
 var _debugMode= false;
 function enableDebug() {
     _debugMode = true;
     $('#autoAlignButton').button('enable');
-    $('#autoAlignButton1').button('enable');
 }
 
 // https://stackoverflow.com/questions/17242144/javascript-convert-hsb-hsv-color-to-rgb-accurately
