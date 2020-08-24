@@ -79,7 +79,7 @@ function sliderMoved(event, ui) {
 
     let m = (cm / 100).toFixed(2);
     let feet = Math.floor(inches / 12);
-    let oldValue = Math.floor((1 - scalar) * 12 + 1);
+    let oldValue = Math.floor((1 - scalar) * 13.5);
     inches = Math.floor(inches - (feet * 12));
     value = value.toFixed(3);
     $("#size").empty();
