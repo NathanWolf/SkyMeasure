@@ -320,6 +320,20 @@ div#officialChart img {
     width: 135%;
 }
 
+div#oldChart {
+    position: absolute;
+    left: 50%;
+    margin-left: -446px;
+    top: 75px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+div#oldChart img {
+    opacity: 80%;
+    width: 112%;
+}
+
 div#knownScreenshot {
     position: absolute;
     left: 50%;

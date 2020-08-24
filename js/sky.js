@@ -15,6 +15,7 @@ function initialize() {
     $('#showGrow').button().on('click', toggleGrow);
     $('#showShrink').button().on('click', toggleShrink);
     $('#showOfficial').button().on('click', toggleOfficial);
+    $('#showOld').button().on('click', toggleOld);
     $('#showScreenshot').button().on('click', toggleScreenshot);
     $('#showSlideshow').button().on('click', toggleSlideshow);
     $('#statsButton').button().on('click', showStats);
@@ -174,7 +175,9 @@ function screenshotReady() {
     sliderMoved();
     updateHandles();
     $('#autoAlignButton').button('enable');
-    autoAlignImage(0, true);
+    if (!_debugMode) {
+        autoAlignImage(0, false);
+    }
 }
 
 function resize(target, new_width, new_height){
@@ -321,6 +324,10 @@ function toggleShrink() {
 
 function toggleOfficial() {
     toggle($('#showOfficial'), $('#officialChart'));
+}
+
+function toggleOld() {
+    toggle($('#showOld'), $('#oldChart'));
 }
 
 function toggleScreenshot() {
