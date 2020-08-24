@@ -83,10 +83,10 @@ function sliderMoved(event, ui) {
     inches = Math.floor(inches - (feet * 12));
     value = value.toFixed(3);
     $("#size").empty();
-    $("#size").append($("<div>").addClass("metricScale").text(m + 'm'));
-    $("#size").append($("<div>").addClass("imperialScale").text(feet + "'" + inches + '"'));
-    $("#size").append($("<div>").addClass("rawScale").text(value));
-    $("#size").append($("<div>").addClass("oldScale").text(oldValue));
+    $("#size").append($("<div>").prop('title', "Your Sky kid's height if they existed IRL, in Meters").addClass("metricScale").text(m + 'm'));
+    $("#size").append($("<div>").prop('title', "Your Sky kid's height if they existed IRL, in Feet/Inches").addClass("imperialScale").text(feet + "'" + inches + '"'));
+    $("#size").append($("<div>").prop('title', "Your Sky kid's height using raw Sky height units").addClass("rawScale").text(value));
+    $("#size").append($("<div>").prop('title', "Your Sky kid's height using the old height chart number system").addClass("oldScale").text(oldValue));
 }
 
 var _slides = [];
