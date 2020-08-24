@@ -295,8 +295,8 @@ div#shrinkScreenshot img {
 div#slideshow {
     position: absolute;
     left: 50%;
-    margin-left: -268px;
-    top: 176px;
+    margin-left: -300px;
+    top: 190px;
     z-index: 1000;
     pointer-events: none;
 }
