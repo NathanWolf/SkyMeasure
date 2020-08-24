@@ -197,15 +197,15 @@ a.discordLink {
 div#smallestScreenshot {
     position: absolute;
     left: 50%;
-    margin-left: -312px;
-    top: 199px;
+    margin-left: -310px;
+    top: 202px;
     z-index: 5;
     pointer-events: none;
 }
 
 div#smallestScreenshot img {
     opacity: 80%;
-    width: 134%;
+    width: 132%;
 }
 
 div#tallestScreenshot {
