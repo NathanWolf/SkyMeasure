@@ -74,7 +74,7 @@ div.overlay {
 
 div#skip {
     margin-left: 370px;
-    margin-top: 8px;
+    margin-top: 14px;
     border-radius: 50%;
     border: 16px solid white;
     background-color: rgba(255,255,255,0.9);
@@ -85,7 +85,7 @@ div#skip {
 
 div#previous {
     margin-left: -360px;
-    margin-top: 8px;
+    margin-top: 14px;
     border-radius: 50%;
     border: 16px solid white;
     background-color: rgba(255,255,255,0.9);
@@ -96,7 +96,7 @@ div#previous {
 
 div#next {
     margin-left: 310px;
-    margin-top: 8px;
+    margin-top: 14px;
     border-radius: 50%;
     border: 16px solid white;
     background-color: rgba(255,255,255,0.9);
