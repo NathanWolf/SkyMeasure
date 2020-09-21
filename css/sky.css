@@ -379,7 +379,7 @@ span#stats_percentile {
     height:     100%;
     width:      100%;
     background: rgba(0, 0, 0, 0.8)
-                url('http://i.stack.imgur.com/FhHRx.gif')
+                url('///i.stack.imgur.com/FhHRx.gif')
                 50% 50%
                 no-repeat;
 }

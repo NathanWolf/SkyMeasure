@@ -38,8 +38,8 @@ array_map('indexFile', $fileDescriptors);
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/curate.css?v=3">
 
-    <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="///code.jquery.com/jquery.min.js"></script>
+    <script src="///code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>
 
     <script src="js/curate.js?v=3"></script>
