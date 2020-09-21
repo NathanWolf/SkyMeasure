@@ -77,18 +77,17 @@ array_map('indexFile', $fileDescriptors);
         <button id="skipEnd" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Go to the last image">
             <span class="ui-icon ui-icon-arrowthickstop-1-e"></span> Last
         </button>
+        <span style="margin-left: 10em">
+            <button id="deleteButton" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Delete this screenshot">
+                <span class="ui-icon ui-icon-trash"></span> Delete
+            </button>
+        </span>
     </div>
     <div id="modTime">
 
     </div>
     <div id="screenshotContainer">
         <img id="screenshot" alt="Screenshot" src="image/blank.png"/>
-    </div>
-
-    <div id="bottomToolbar">
-        <button id="deleteButton" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Delete this screenshot">
-            <span class="ui-icon ui-icon-trash"></span> Delete
-        </button>
     </div>
 
     <div id="linkToolbar">
