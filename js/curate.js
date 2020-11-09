@@ -6,7 +6,23 @@ function initialize() {
     $('#skipEnd').button({showLabel: false}).on('click', skipEnd);
     $('#sort').button({showLabel: false}).on('click', sort);
     $('#deleteButton').button({showLabel: false}).on('click', deleteImage);
+    $(document).keydown(onKeyDown);
     skipBeginning();
+}
+
+function onKeyDown(e) {
+    if (e.which == 37) {
+       previousImage();
+       return false;
+    }
+    if (e.which == 39) {
+       nextImage();
+       return false;
+    }
+    if (e.which == 68) {
+       deleteImage();
+       return false;
+    }
 }
 
 function updateImage() {

@@ -42,7 +42,7 @@ array_map('indexFile', $fileDescriptors);
     <script src="///code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>
 
-    <script src="js/curate.js?v=3"></script>
+    <script src="js/curate.js?v=4"></script>
 
     <script type="text/javascript">
         var _screenshots = <?= json_encode($files) ?>;
