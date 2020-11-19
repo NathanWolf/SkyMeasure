@@ -199,11 +199,7 @@ function uploadFile() {
         width: 400,
         modal: true,
         buttons: {
-            "Upload Screenshot": function() {
-                $(this).dialog("close");
-                $('#imageForm').submit();
-            },
-            Cancel: function() {
+            Awwww: function() {
                 $(this).dialog("close");
             }
         }
