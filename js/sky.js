@@ -5,7 +5,6 @@ function initialize() {
     $('#previous').on('click', previousSlide);
     $('#skip').on('click', goToTool);
     $('#imageInput').change(readURL);
-    $('#uploadButton').button().on('click', uploadFile);
     $('#showHuge').button().on('click', toggleHuge);
     $('#showTiny').button().on('click', toggleTiny);
     $('#showTallest').button().on('click', toggleTallest);
@@ -19,8 +18,9 @@ function initialize() {
     $('#showScreenshot').button().on('click', toggleScreenshot);
     $('#showSlideshow').button().on('click', toggleSlideshow);
     $('#statsButton').button().on('click', showStats);
-    $('#autoAlignButton').button().button('disable').on('click', autoAlignImage1);
-    $('#slideshowImage').load(slideshowImageReady);
+    // $('#autoAlignButton').button().button('disable').on('click', autoAlignImage1);
+    // $('#slideshowImage').load(slideshowImageReady);
+    // $('#uploadButton').button().on('click', uploadFile);
     $('#secretButton').on('click', enableDebug);
 
     $('#userImage').resizable({
@@ -174,10 +174,12 @@ function screenshotReady() {
     resize($('#userImage'), 600, 600 / width * height);
     sliderMoved();
     updateHandles();
+    /*
     $('#autoAlignButton').button('enable');
     if (!_debugMode) {
         autoAlignImage(0, false);
     }
+    */
 }
 
 function resize(target, new_width, new_height){
