@@ -16,8 +16,8 @@ function initialize() {
     $('#showOfficial').button().on('click', toggleOfficial);
     $('#showOld').button().on('click', toggleOld);
     $('#showScreenshot').button().on('click', toggleScreenshot);
-    $('#showSlideshow').button().on('click', toggleSlideshow);
     $('#statsButton').button().on('click', showStats);
+    // $('#showSlideshow').button().on('click', toggleSlideshow);
     // $('#autoAlignButton').button().button('disable').on('click', autoAlignImage1);
     // $('#slideshowImage').load(slideshowImageReady);
     // $('#uploadButton').button().on('click', uploadFile);
