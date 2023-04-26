@@ -17,6 +17,8 @@ function initialize() {
     $('#showOld').button().on('click', toggleOld);
     $('#showScreenshot').button().on('click', toggleScreenshot);
     $('#statsButton').button().on('click', showStats);
+    $('#disclaimerConfirmButton').button().on('click', confirmDisclaimer);
+    $('#disclaimerCancelButton').button().on('click', cancelDisclaimer);
     // $('#showSlideshow').button().on('click', toggleSlideshow);
     // $('#autoAlignButton').button().button('disable').on('click', autoAlignImage1);
     // $('#slideshowImage').load(slideshowImageReady);
@@ -52,6 +54,14 @@ function initialize() {
     }
 
     startPromptTimer();
+}
+
+function confirmDisclaimer() {
+    $('#disclaimer').hide();
+}
+
+function cancelDisclaimer() {
+    location.href = "https://thatskygame.com";
 }
 
 function sliderMoved(event, ui) {
